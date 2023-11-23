@@ -6,14 +6,14 @@ import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-users',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './user.component.html',
+  templateUrl: './users.component.html',
   styleUrl: './user.component.css',
   providers:[UserService],
 })
-export class UserComponent  implements OnInit{
+export class UsersComponent  implements OnInit{
 
   users:User[]=[];
 
