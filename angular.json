@@ -3,19 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mini-facebook": {
+    "mini-facebookv2": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -23,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mini-facebook",
+            "outputPath": "dist/mini-facebookv2",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -67,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mini-facebook:build:production"
+              "buildTarget": "mini-facebookv2:build:production"
             },
             "development": {
-              "buildTarget": "mini-facebook:build:development"
+              "buildTarget": "mini-facebookv2:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "mini-facebook:build"
+            "buildTarget": "mini-facebookv2:build"
           }
         },
         "test": {
