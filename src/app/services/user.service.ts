@@ -52,4 +52,16 @@ export class UserService {
       this.Users.push(new User(this.dataUsers[i][0],this.dataUsers[i][1],this.dataUsers[i][2],this.dataUsers[i][3],this.dataUsers[i][4],liczba))
     }
    }
+
+
+   getUsers():User[]{
+    return this.Users;
+   }
+
+   getUser(id:number):User{
+    return this.Users[id];
+   }
+
+
+
 }
