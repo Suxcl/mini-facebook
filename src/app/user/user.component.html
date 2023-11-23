@@ -1,1 +1,9 @@
-<p>user works!</p>
+<p [ngClass] = "'title'">Lista Userów</p>
+<ol>
+
+    <li *ngFor="let user of users;">
+        {{user.Name}}{{user.Surname}}<br>
+        {{user.Email}}<br>
+        {{user.PhoneNumber}}
+    </li>
+</ol>
