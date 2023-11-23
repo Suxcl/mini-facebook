@@ -39,12 +39,6 @@ export class UserService {
 
   Users:User[]=[];
 
-
-
-
-
-
-  
   constructor() {
     for(let i=0;i<30;i++){
       let napis:string = this.dataUsers[i][5].replace('-','');
@@ -61,7 +55,5 @@ export class UserService {
    getUser(id:number):User{
     return this.Users[id];
    }
-
-
 
 }

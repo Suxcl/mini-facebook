@@ -8,6 +8,12 @@ export class User{
     public friendsList:User[];
     
     constructor(username:string, name:string, surname:string, password:string, email:string, phoneNumber:number ){
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.friendsList = [];
     }
 
