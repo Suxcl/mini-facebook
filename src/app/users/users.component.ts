@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './users.component.html',
-  styleUrl: './user.component.css',
+  styleUrl: './users.component.css',
   providers:[UserService],
 })
 export class UsersComponent  implements OnInit{
