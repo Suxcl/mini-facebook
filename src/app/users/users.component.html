@@ -1,9 +1,21 @@
-<p [ngClass] = "'title'">Lista Userów</p>
-<ol>
+<p [ngClass] = "'title'">Users List</p>
 
-    <li *ngFor="let user of users;">
-        {{user.Name}}{{user.Surname}}<br>
+<div class="container">
+    <div *ngFor="let user of users; index as i">
+        {{user.Name}} {{user.Surname}}<br>
         {{user.Email}}<br>
-        {{user.PhoneNumber}}
-    </li>
-</ol>
+        {{user.PhoneNumber}}<br>
+        <button (click)="selected = i">Edit</button>
+        <span *ngIf="selected > -1">
+            <p>Siema</p>
+            <app-edit-user
+                [user4edit]="user"
+                [selectedUser]="selected"
+            ></app-edit-user>
+        </span>
+
+
+    </div>
+
+</div>
+

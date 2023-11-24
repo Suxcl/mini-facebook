@@ -4,11 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 
 import { User } from './models/user.model';
+import { BlogComponent } from './blog/blog.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, UsersComponent],
+  imports: [CommonModule, RouterOutlet, BlogComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -16,7 +17,3 @@ export class AppComponent {
   title = 'mini-facebook';
 }
 
-// export const routes: Routes = [
-//   {path: 'users', component: UserComponent},
-  
-// ];
