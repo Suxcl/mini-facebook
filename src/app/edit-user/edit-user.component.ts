@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
       console.log('edit user launched', this.user4edit.surname);
       this.form4edit.setValue({
-        username: this.user4edit,
+        username: this.user4edit,   
         name: this.user4edit,
         surname: this.user4edit.surname,
         Email: this.user4edit.Email,
