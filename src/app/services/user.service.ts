@@ -77,11 +77,11 @@ export class UserService {
    }
 
    getUserByUsername(username:string):User{
-    this.Users.forEach(element => {
-      if (element.Username==username) {
-        return element;
+    for(let user of this.Users){
+      if (user.Username==username) {
+        return user;
       }
-    });
+    }
     return {} as User;
    }
   //  robiłem to w piątek wieczorem po 2 piwach jak będzie dziąłac to gitówa
