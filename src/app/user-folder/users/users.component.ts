@@ -42,10 +42,13 @@ export class UsersComponent  implements OnInit{
 
 
   doEditUser(data:{user:User, which:number}){
-
     this.users[data.which] = data.user;
     console.log("after edit", this.users);
     this.selected = -1;
+  }
+
+  doLoginUser(data:{login:string, password:string}){
+    
   }
 
   ngOnInit(): void {

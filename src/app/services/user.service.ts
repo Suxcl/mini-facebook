@@ -52,6 +52,16 @@ export class UserService {
     return this.Users;
    }
 
+   tryLogin(nick:string,password:string){
+    for (let i = 0; i < this.Users.length; i++) {
+      const element = this.Users[i];
+      if (element.username == nick && element.password == password) {
+        return element;
+      }
+    }
+    return null;
+   }
+
    getUser(id:number):User{
     return this.Users[id];
    }
