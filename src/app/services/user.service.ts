@@ -55,5 +55,15 @@ export class UserService {
    getUser(id:number):User{
     return this.Users[id];
    }
+  //  robiłem to w piątek wieczorem po 2 piwach jak będzie dziąłac to gitówa
+   addUser(user: User){
+    this.Users.push(user);
+   }
+   updateUser(user:User, id:number){
+      this.Users[id] = user;
+   }
+   removeUser(id:number){
+    delete this.Users[id];
+   }
 
 }

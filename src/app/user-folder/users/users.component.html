@@ -6,14 +6,18 @@
         {{user.Email}}<br>
         {{user.PhoneNumber}}<br>
         <button (click)="selected = i">Edit</button>
-        <span *ngIf="selected > -1">
-            <p>Siema</p>
+        <span *ngIf="selected == i">
             <app-edit-user
                 [user4edit]="user"
                 [selectedUser]="selected"
+                (doEditInParent)="doEditUser($event)"
             ></app-edit-user>
         </span>
+        <!-- <span *ngIf="selected != i ">
+            <a [routerLink]="['/edit-student', i]">Edycja w odz oknie</a>
 
+        </span> -->
+        
 
     </div>
 

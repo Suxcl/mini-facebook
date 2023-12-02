@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from '../users/users.component';
+import { UsersComponent } from '../user-folder/users/users.component';
 
 @Component({
   selector: 'app-blog',

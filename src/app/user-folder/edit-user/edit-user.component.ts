@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,7 +15,7 @@ import { UserService } from '../services/user.service';
 })
 export class EditUserComponent implements OnInit {
   @Input() user4edit!:User;
-  @Input() selectedUser!:number;
+  @Input() selectedUser:number=-1;
   @Output() doEditInParent = new EventEmitter< {user:User, which:number} >();
 
   form4edit:FormGroup;
@@ -23,6 +23,7 @@ export class EditUserComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService){
+      console.log("edit constructor running")
       this.form4edit = new FormGroup({
         username: new FormControl(),
         name: new FormControl(),

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './user-folder/users/users.component';
 
 import { User } from './models/user.model';
 import { BlogComponent } from './blog/blog.component';
@@ -16,4 +16,3 @@ import { BlogComponent } from './blog/blog.component';
 export class AppComponent {
   title = 'mini-facebook';
 }
-
