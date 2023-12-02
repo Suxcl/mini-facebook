@@ -1,1 +1,7 @@
-<p>login-user works!</p>
+<form [formGroup]="form4login" (ngSubmit)="doLoginUser()">
+    <label>Username: </label><br>
+    <input type="text" formControlName="username"><br>
+    <label>Password: </label><br>
+    <input type="text" formControlName="name"><br>
+    <input [disabled]="!form4login.valid" type="submit" value="Change">
+</form>

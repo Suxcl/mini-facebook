@@ -75,6 +75,15 @@ export class UserService {
    getUser(id:number):User{
     return this.Users[id];
    }
+
+   getUserByUsername(username:string):User{
+    this.Users.forEach(element => {
+      if (element.Username==username) {
+        return element;
+      }
+    });
+    return {} as User;
+   }
   //  robiłem to w piątek wieczorem po 2 piwach jak będzie dziąłac to gitówa
    addUser(user: User){
     this.Users.push(user);
