@@ -39,6 +39,9 @@ export class UserService {
 
   Users:User[]=[];
 
+  
+  loggedUser:User = {} as User;
+
   constructor() {
     for(let i=0;i<30;i++){
       let napis:string = this.dataUsers[i][5].replace('-','');
@@ -52,15 +55,22 @@ export class UserService {
     return this.Users;
    }
 
-   tryLogin(nick:string,password:string){
-    for (let i = 0; i < this.Users.length; i++) {
-      const element = this.Users[i];
-      if (element.username == nick && element.password == password) {
-        return element;
-      }
-    }
-    return null;
+   loginUser(user:User):void{
+    this.loggedUser = user;
    }
+   unloginUser():void{
+    this.loggedUser = {} as User
+   }
+
+  //  tryLogin(nick:string,password:string){
+  //   for (let i = 0; i < this.Users.length; i++) {
+  //     const element = this.Users[i];
+  //     if (element.username == nick && element.password == password) {
+  //       return element;
+  //     }
+  //   }
+  //   return null;
+  //  }
 
    getUser(id:number):User{
     return this.Users[id];

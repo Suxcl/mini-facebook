@@ -28,21 +28,24 @@ export class EditUserComponent implements OnInit {
         username: new FormControl(),
         name: new FormControl(),
         surname: new FormControl(),
-        Email: new FormControl(),
-        PhoneNumber: new FormControl(),
+        email: new FormControl(),
+        phoneNumber: new FormControl(),
 
       });
   }
 
   ngOnInit(): void {
-      console.log('edit user launched', this.user4edit.surname);
+      console.log('edit user launched', this.user4edit.Surname);
+      console.log(this.user4edit.Surname);
+      console.log(this.user4edit.Email);
       this.form4edit.setValue({
-        username: this.user4edit,   
-        name: this.user4edit,
-        surname: this.user4edit.surname,
-        Email: this.user4edit.Email,
-        PhoneNumber: this.user4edit.PhoneNumber
+        username: this.user4edit.Username,   
+        name: this.user4edit.Name,
+        surname: this.user4edit.Surname,
+        email: this.user4edit.Email,
+        phoneNumber: this.user4edit.PhoneNumber
       });
+      console.log("Test nigger: " + this.form4edit.valid);
   }
   doEditUser(){
     console.log('form', this.form4edit);

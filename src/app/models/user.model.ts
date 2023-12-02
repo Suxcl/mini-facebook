@@ -1,11 +1,11 @@
 export class User{
-    public username!: string;
-    public name!: string;
-    public surname!: string;
+    private username!: string;
+    private name!: string;
+    private surname!: string;
     private password!: string;
     private email!:string;
     private phoneNumber!: number;
-    public friendsList:User[];
+    private friendsList:User[];
     // public registration_dat!:date;
     // public 
     constructor(username:string, name:string, surname:string, password:string, email:string, phoneNumber:number ){
@@ -18,14 +18,14 @@ export class User{
         this.friendsList = [];
     }
 
-    get Username():string{
+    public get Username():string{
         return this.username;
     }
-    set Username(username:string){
+    public set Username(username:string){
         this.username = username;
     }
 
-    get Name():string{
+    public get Name():string{
         return this.name;
     }
     set Name(name:string){
@@ -40,7 +40,7 @@ export class User{
     get PhoneNumber():number{
         return this.phoneNumber;
     }
-    get Email():string{
+    public get Email():string{
         return this.email;
     }
     get FriendsList():User[]{
