@@ -7,6 +7,9 @@ import { uniqueUsernameValidator } from '../../validators/uniqueUsernameValidato
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
+
+
+
 @Component({
   selector: 'app-edit-user',
   standalone: true,
@@ -25,15 +28,16 @@ export class EditUserComponent implements OnInit {
     private router: Router,
     private userService: UserService){
       console.log("edit constructor running")
+      
       this.form4edit = new FormGroup({
         username: new FormControl(
-            [
-              Validators.required,
-              Validators.minLength(5),
-              Validators.maxLength(50),
-              uniqueUsernameValidator(userService)
-            ]
-          ),
+          [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(50),
+            uniqueUsernameValidator(userService)
+          ]
+        ),
         name: new FormControl(
           [
             Validators.required,

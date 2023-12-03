@@ -54,13 +54,11 @@ export class UserService {
    getUsers():User[]{
     return this.Users;
    }
+   getUser(id:number):User{
+    return this.Users[id];
+   }
 
-   loginUser(user:User):void{
-    this.loggedUser = user;
-   }
-   unloginUser():void{
-    this.loggedUser = {} as User
-   }
+   
 
   //  tryLogin(nick:string,password:string){
   //   for (let i = 0; i < this.Users.length; i++) {
@@ -72,9 +70,7 @@ export class UserService {
   //   return null;
   //  }
 
-   getUser(id:number):User{
-    return this.Users[id];
-   }
+
 
    getUserByUsername(username:string):User{
     for(let user of this.Users){
@@ -93,6 +89,18 @@ export class UserService {
    }
    removeUser(id:number){
     delete this.Users[id];
+   }
+
+
+
+   loginUser(user:User):void{
+    this.loggedUser = user;
+   }
+   unloginUser():void{
+    this.loggedUser = {} as User
+   }
+   getLoggedUser(){
+    return this.loggedUser;
    }
 
 }

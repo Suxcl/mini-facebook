@@ -1,7 +1,7 @@
 <form [formGroup]="form4login" (ngSubmit)="doLoginUser()">
-    <label>Username: </label><br>
+    <label for="username">Username: </label><br>
     <input type="text" formControlName="username"><br>
-    <label>Password: </label><br>
-    <input type="text" formControlName="name"><br>
-    <input [disabled]="!form4login.valid" type="submit" value="Change">
+    <label for="password">Password: </label><br>
+    <input type="text" formControlName="password"><br>
+    <input [disabled]="!form4login.valid" type="submit" value="Zaloguj">
 </form>

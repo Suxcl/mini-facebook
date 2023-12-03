@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mini-facebook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+            </li>
+            <!-- When someone is logged -->
+            <span *ngIf="isLogged">
+                <li>
+                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >Profil</a>      
+                </li>
+                <li>
+                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" (click)="logout()">Wyloguj</a>      
+                </li>
+            </span>
+            <!-- When no one is logged -->
+            <span *ngIf="!isLogged">
+                <li>
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Zaloguj</a>
+                </li>
+                <li>
+                    <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active" >Zarejestruj sie</a>
+                </li>
+            </span>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>
