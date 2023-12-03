@@ -48,7 +48,6 @@ export class LoginUserComponent implements OnInit{
 
         window.alert("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
         this.auth.login(temp);
-        
 
         console.log("Login.ts Testing login user from auth.service: " + this.auth.getLoggedUser().Surname);
   

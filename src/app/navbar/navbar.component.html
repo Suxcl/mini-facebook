@@ -21,15 +21,24 @@
                     <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" (click)="logout()">Wyloguj</a>      
                 </li>
             </span>
-            <!-- When no one is logged -->
-            <span *ngIf="!isLogged">
-                <li>
+            <!-- <li>
+                When no one is logged
+                <span *ngIf="!isLogged">
                     <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Zaloguj</a>
-                </li>
-                <li>
+                </span>
+            </li> -->
+            <li>
+                <!-- When no one is logged -->
+                <span *ngIf="!isLogged">
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Zaloguj</a>
+                </span>
+            </li>
+            <li>
+                <span *ngIf="!isLogged">
                     <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active" >Zarejestruj sie</a>
-                </li>
-            </span>
+                </span>
+            </li>
+            
         </ul>
     </div>
 </nav>
