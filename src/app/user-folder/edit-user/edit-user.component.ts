@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
+import { uniqueUsernameValidator } from '../../validators/uniqueUsernameValidator';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -25,11 +26,38 @@ export class EditUserComponent implements OnInit {
     private userService: UserService){
       console.log("edit constructor running")
       this.form4edit = new FormGroup({
-        username: new FormControl(),
-        name: new FormControl(),
-        surname: new FormControl(),
-        email: new FormControl(),
-        phoneNumber: new FormControl(),
+        username: new FormControl(
+            [
+              Validators.required,
+              Validators.minLength(5),
+              Validators.maxLength(50),
+              uniqueUsernameValidator(userService)
+            ]
+          ),
+        name: new FormControl(
+          [
+            Validators.required,
+            Validators.maxLength(50)
+          ]
+        ),
+        surname: new FormControl(
+          [
+            Validators.required,
+            Validators.maxLength(50)
+          ]
+        ),
+        email: new FormControl(
+          [
+            Validators.required,
+            Validators.email
+          ]
+        ),
+        phoneNumber: new FormControl(
+          [
+            Validators.required,
+            // custom validator for checking number size
+          ]
+        ),
 
       });
   }
