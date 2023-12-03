@@ -17,7 +17,7 @@ import { User } from '../models/user.model';
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, LoginUserComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  providers:[UserService],
+  providers:[UserService, AuthenticationService],
 })
 export class NavbarComponent implements OnInit{
 

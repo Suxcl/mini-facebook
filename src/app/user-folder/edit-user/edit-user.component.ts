@@ -36,6 +36,7 @@ export class EditUserComponent implements OnInit {
             Validators.minLength(5),
             Validators.maxLength(50),
             uniqueUsernameValidator(userService)
+          
           ]
         ),
         name: new FormControl(
@@ -77,7 +78,7 @@ export class EditUserComponent implements OnInit {
         email: this.user4edit.Email,
         phoneNumber: this.user4edit.PhoneNumber
       });
-      console.log("Test nigger: " + this.form4edit.valid);
+      
   }
   doEditUser(){
     console.log('form', this.form4edit);

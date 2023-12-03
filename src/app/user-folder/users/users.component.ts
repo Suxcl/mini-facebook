@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
+
 import { UserComponent } from '../user/user.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { FormsModule } from '@angular/forms';
@@ -26,8 +27,19 @@ export class UsersComponent  implements OnInit{
   selected:number;
 
 
-  constructor(private userService:UserService){
+  constructor(
+    private userService:UserService,
+    private router:Router){
     this.selected = -1;
+    this.users = this.userService.getUsers();
+    console.log("users.ts constructor"+this.users);
+    this.userService.refreshUsers$.subscribe(()=>{
+      console.log("users.ts refreshing users");
+      this.users = this.userService.getUsers();
+      
+      
+      // window.location.reload();
+    })
   }
 
   public select(which:number):void {
@@ -47,13 +59,11 @@ export class UsersComponent  implements OnInit{
     this.selected = -1;
   }
 
-  doLoginUser(data:{login:string, password:string}){
-    
-  }
 
   ngOnInit(): void {
-      console.log("User component OnInit");
+      // console.log("users.ts OnInit");
       this.users = this.userService.getUsers();
+      console.log("users.ts oninit"+this.users);
   }
 }
 

@@ -18,18 +18,14 @@ export class AuthenticationService {
             let userTMP:any = JSON.parse( localStorage.getItem('currentUser')|| "{}");
             if(userTMP === "{}"){ userTMP = {} as User; }
 
-            console.log("auth.service user reader from localstorage: userTMP");
-            console.log(userTMP);
-            console.log(typeof(userTMP));
-            
-            // if 
-            if(Object.keys(this.user).length != 0){
-                console.log("auth.service User reader is valid User")
+            // cheecking if reader value have keys
+            if(Object.keys(userTMP).length != 0){
+                console.log("auth.service User is valid User")
                 this.user = userTMP;
-            }else{
-                console.log("auth.service User reader is not valid User")
+            }else{ // if ther is no keys there is no logged user
+                console.log("auth.service User is not valid User")
             }
-        }catch (err){
+        }catch (err){ // parsing error when there is no value to read from localStorage
             console.log("auth.service error on JSON parse    error value: "+err);
         }
         

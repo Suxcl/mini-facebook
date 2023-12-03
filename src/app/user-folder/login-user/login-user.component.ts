@@ -40,19 +40,18 @@ export class LoginUserComponent implements OnInit{
     console.log('login:', this.form4login);
     const temp = this.userService.getUserByUsername(this.form4login.value.username);
     console.log(temp);
-    if(!temp){
+    if(!temp){ // gdy user nie został odnaleziony
+      window.alert("Nie ma takiego użytkownika");
       console.log('Login.ts There is no user with this username');
-    }else{
+    }else{ // gdy user został odnaleziony
       if (this.form4login.value.username == temp.Username && this.form4login.value.password == temp.Password) {
         console.log('Login.ts login Succeded');
 
         window.alert("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
-        this.auth.login(temp);
-
-        console.log("Login.ts Testing login user from auth.service: " + this.auth.getLoggedUser().Surname);
-  
-        this.router.navigate(['/']);      
-      }else{
+        this.auth.login(temp); // zalogowanie usera w service authenticator
+        this.router.navigate(['/']);  // przekierowanie gdziekolwiek bo i tak przejdzie na stronę główną
+      }else{ // gdy podane są złe dane
+        window.alert("Błędne dane logowania");
         console.log('Login.ts Login fails');
       }  
     }

@@ -7,28 +7,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#">Link</a>
             </li>
+            
             <!-- When someone is logged -->
-            <span *ngIf="isLogged">
-                <li>
-                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >Profil</a>      
-                </li>
-                <li>
-                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" (click)="logout()">Wyloguj</a>      
-                </li>
-            </span>
-            <!-- <li>
-                When no one is logged
-                <span *ngIf="!isLogged">
-                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Zaloguj</a>
-                </span>
-            </li> -->
             <li>
-                <!-- When no one is logged -->
+                <span *ngIf="isLogged">
+                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >Profil</a>      
+                </span>
+            </li>
+            <li>
+                <span *ngIf="isLogged">
+                    <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" (click)="logout()">Wyloguj</a>      
+                </span>
+            </li>
+            
+            <!-- When no one is logged -->
+            <li>
                 <span *ngIf="!isLogged">
                     <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Zaloguj</a>
                 </span>
