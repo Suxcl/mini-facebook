@@ -7,6 +7,8 @@ export class UserService {
 
   public refreshUsers$: EventEmitter<void> = new EventEmitter<void>();
 
+  public addUser$: EventEmitter<{user:User}> = new EventEmitter<{user:User}>();
+
   dataUsers = [
     ["user1", "Jan", "Kowalski", "haslo123", "jan.kowalski@email.com", "123-456-7890"],
     ["user2", "Anna", "Nowak", "securepass", "anna.nowak@email.com", "987-654-3210"],

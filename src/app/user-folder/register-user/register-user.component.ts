@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 // validators
 import { uniqueUsernameValidator } from '../../validators/uniqueUsernameValidator';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-register-user',
@@ -26,49 +27,43 @@ export class RegisterUserComponent implements OnInit {
   constructor(
     private userS:UserService,
     private auth:AuthenticationService,
-    private router:Router) {
+    private router:Router,
+    private fb:FormBuilder) {
       console.log("register.ts constructor");
-      this.f = new FormGroup({
-        username: new FormControl(
-          // [
-          //   Validators.required,
-          //   Validators.minLength(5),
-          //   Validators.maxLength(50),
-          //   uniqueUsernameValidator(userS)
-          // ]
-        ),
-        password: new FormControl(
-          // [
-          //   Validators.required,
+      this.f = fb.group({
+        username: 
+          [ '',
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(50),
+            uniqueUsernameValidator(userS)
+          ],
+        password: [
+          '',
+          Validators.required,
           //   Validators.minLength(8),
           //   // custom validator for password strenght
-          // ]
-        ),
-        name: new FormControl(
-          // [
-          //   Validators.required,
-          //   Validators.maxLength(50)
-          // ]
-        ),
-        surname: new FormControl(
-          // [
-          //   Validators.required,
-          //   Validators.maxLength(50)
-          // ]
-        ),
-        email: new FormControl(
-          // [
-          //   Validators.required,
-          //   Validators.email
-          // ]
-        ),
-        phoneNumber: new FormControl(
-          // [
-          //   Validators.required,
-          //   // custom validator for checking number size
-          // ]
-        ),
-
+        ],
+        name: [
+          '',
+          Validators.required,
+          Validators.maxLength(50)
+        ],
+        surname: [
+          '',
+          Validators.required,
+          Validators.maxLength(50)
+        ],
+        email: [
+          '',
+          Validators.required,
+          Validators.email
+        ],
+        phoneNumber: [
+          '',
+          Validators.required,
+          //custom validator for checking number size
+        ]
       });
   }
 
@@ -82,17 +77,16 @@ export class RegisterUserComponent implements OnInit {
       this.f.value.email,
       this.f.value.phoneNumber,
     );
-
-    // console.log("register.ts adding new user: "+newUser);
     console.log("register.ts adding new user: "+newUser.Username);
-    // console.log("register.ts adding new user: "+newUser.Surname);
-    // console.log("register.ts adding new user: "+newUser.Name);
+    // this.userS.addUser(newUser);
+    this.auth.register(newUser);
+    this.router.navigate(
+      ['/']
+    );
+    
+  };
 
-    this.userS.addUser(newUser);
-    this.auth.login(newUser);
-    this.router.navigate(['/']);
-
-  }
+  
   ngOnInit(): void {
     console.log('register.ts onInit');
     // clearowanie elemntów formularza z powopdu wyświetlania

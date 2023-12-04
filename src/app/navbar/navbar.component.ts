@@ -1,9 +1,10 @@
-import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { LoginUserComponent } from '../user-folder/login-user/login-user.component';
+import { RegisterUserComponent } from '../user-folder/register-user/register-user.component';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -14,13 +15,14 @@ import { User } from '../models/user.model';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, LoginUserComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, LoginUserComponent,RegisterUserComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
   providers:[UserService, AuthenticationService],
 })
 export class NavbarComponent implements OnInit{
 
+  @Input() users!:User[];
   isLogged!:boolean;
 
   constructor(
@@ -38,6 +40,7 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit(): void {
       this.isLogged = this.authenticationService.isSomeoneLoggedIn();
+      
       console.log("navbar.ts " + this.isLogged);
       console.log("navbar.ts test logged user "+this.authenticationService.getLoggedUser().Surname);
   }

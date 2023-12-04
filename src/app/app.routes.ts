@@ -8,11 +8,14 @@ import { RegisterUserComponent } from './user-folder/register-user/register-user
 import { BlogComponent } from './blog/blog.component';
 import { UserComponent } from './user-folder/user/user.component';
 import { Component } from '@angular/core';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
-    { path: 'show-user', component: UserComponent },
+    { path: 'show-user/:id', component: UserComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'login', component: LoginUserComponent },
     { path: 'register', component: RegisterUserComponent },
-    { path: '**', component: BlogComponent},
+    { path: '', component: BlogComponent},
+    // { path: '**', component: Component},
 ];
+
