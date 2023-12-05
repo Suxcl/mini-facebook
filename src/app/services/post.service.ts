@@ -25,8 +25,6 @@ export class PostService {
     return this.Posts;
   };
 
-  addPost(username:string, content:string){
-    this.Posts.push(new Post(username,content));
-  };
-  
+
+
 }

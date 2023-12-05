@@ -10,7 +10,8 @@ export class AuthenticationService {
     user:User = {} as User;
     NewUser:boolean = false;
     // event for refreshing navbar if someone logged in or unlogged
-    public refreshNavbar$: EventEmitter<void> = new EventEmitter<void>();
+    public refreshNavbarLogin$: EventEmitter<void> = new EventEmitter<void>();
+    public refreshNavbarLogout$: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(){
         console.log("auth.service constructor");
@@ -35,13 +36,13 @@ export class AuthenticationService {
     login(u:User):void{ // for logging user into localStorage
         this.user = u;
         localStorage.setItem('currentUser', JSON.stringify(u));
-        this.refreshNavbar$.emit();
+        this.refreshNavbarLogin$.emit();
     }
     register(u:User):void{ // registering user, logging him and setting up for adding him to user list on blog.ts
         this.user = u;
         this.NewUser = true;
         localStorage.setItem('currentUser', JSON.stringify(u));
-        this.refreshNavbar$.emit();
+        this.refreshNavbarLogin$.emit();
     }
     changeNewUserToFalse():void{
         this.NewUser = false;
@@ -49,13 +50,14 @@ export class AuthenticationService {
     logout():void{
         this.user = {} as User; 
         localStorage.setItem('currentUser', JSON.stringify({} as User));
-        this.refreshNavbar$.emit();
+        this.refreshNavbarLogout$.emit();
     }
     getLoggedUser():User{
+        console.log('auth.service getLoggedUser() user value: ' + this.user);
         return this.user;
     }
     isSomeoneLoggedIn():boolean{
-        if(Object.keys(this.user).length === 0){
+        if(Object.keys(this.user).length ==0){
             return false;
         }else{return true;}
     }
@@ -63,7 +65,7 @@ export class AuthenticationService {
     isNewUser():boolean{
         return this.NewUser;
     }
-    public triggerRefreshNavbar():void{
-        this.refreshNavbar$.emit();
-    }
+    // public triggerRefreshNavbar():void{
+    //     this.refreshNavbar$.emit();
+    // }
 }

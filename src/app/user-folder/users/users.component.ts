@@ -56,7 +56,8 @@ export class UsersComponent  implements OnInit{
   showProfile(index:number):void{
     this.selected = index;
     console.log(`users.ts Redirecting to |${this.users[index].Username}| Profile with index |${index}|`);
-    this.router.navigate(['/show-user',index, this.users, this.users[index]]);
+    // this.router.navigate(['/show-user',index, this.users, this.users[index]]);
+    this.router.navigate(['/show-user',index]);
   }
 
   

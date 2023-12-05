@@ -23,27 +23,38 @@ import { User } from '../models/user.model';
 export class NavbarComponent implements OnInit{
 
   @Input() users!:User[];
-  isLogged!:boolean;
+  isLogged:boolean = false;
 
   constructor(
     private router: Router,
+    
     private userService:UserService,
     private authenticationService:AuthenticationService){
 
       // Refreshing Navbar if someone logged in
-      this.authenticationService.refreshNavbar$.subscribe(()=>{
+      this.authenticationService.refreshNavbarLogin$.subscribe(()=>{
         console.log("navbar.ts triggering refreshing");
-        this.isLogged = this.authenticationService.isSomeoneLoggedIn();
+        this.isLogged = true; 
+        // this.isLogged = this.authenticationService.isSomeoneLoggedIn();
+        //this.
+  
+        // window.location.reload();
+        // router.navigate(['/']);
       })
-
+      this.authenticationService.refreshNavbarLogout$.subscribe(()=>{
+        console.log("navbar.ts triggering refreshing");
+        this.isLogged = false;
+      })
     }
+
+  
 
   ngOnInit(): void {
       this.isLogged = this.authenticationService.isSomeoneLoggedIn();
-      
       console.log("navbar.ts " + this.isLogged);
       console.log("navbar.ts test logged user "+this.authenticationService.getLoggedUser().Surname);
   }
+ 
 
   logout(){
     this.authenticationService.logout();

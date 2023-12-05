@@ -1,5 +1,5 @@
 <form [formGroup]="form4addpost" (ngSubmit)="doAddPost()">
     <label for="content">Content: </label><br>
     <input type="text" formControlName="content"><br>
-    <input [disabled]="!form4addpost.valid" type="submit" value="Change">
+    <input [disabled]="form4addpost.invalid" type="submit" value="Dodaj Post">
 </form>

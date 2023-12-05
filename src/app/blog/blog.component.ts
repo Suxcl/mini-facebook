@@ -45,6 +45,7 @@ export class BlogComponent implements OnInit{
   ngOnInit(): void {  
     console.log("blog.ts OnInit");
     this.checkForNewUser();
+    
   }
 
 
@@ -68,5 +69,12 @@ export class BlogComponent implements OnInit{
       this.auth.changeNewUserToFalse();
     }
   }
+
   // Posts
+
+  addPost(newpost:Post){
+    console.log('blog.ts addPost metod '+newpost.Username);
+    console.log('blog.ts addPost metod '+newpost.Content);
+    this.posts.push(newpost);
+  }
 }

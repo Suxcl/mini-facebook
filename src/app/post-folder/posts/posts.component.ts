@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
@@ -13,13 +13,13 @@ import { PostComponent } from "../post/post.component";
     imports: [CommonModule, PostComponent]
 })
 export class PostsComponent implements OnInit{
-  posts:Post[]=[];
+  @Input() posts!:Post[];
 
   constructor(private postService:PostService) {}
 
   ngOnInit(): void {
-    console.log("Posts component On Init");
-    this.posts = this.postService.getPosts();
+    console.log("posts.ts component On Init");
+    // this.posts = this.postService.getPosts();
   }
   
   

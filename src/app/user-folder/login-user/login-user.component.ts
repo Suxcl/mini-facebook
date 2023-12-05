@@ -34,6 +34,7 @@ export class LoginUserComponent implements OnInit{
 
   ngOnInit(): void{
     console.log('Login.ts login user initialised');
+  
   }
 
   doLoginUser(){
@@ -49,7 +50,8 @@ export class LoginUserComponent implements OnInit{
 
         window.alert("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
         this.auth.login(temp); // zalogowanie usera w service authenticator
-        this.router.navigate(['/']);  // przekierowanie gdziekolwiek bo i tak przejdzie na stronę główną
+        this.router.navigate(['/'])  
+          // przekierowanie gdziekolwiek bo i tak przejdzie na stronę główną
       }else{ // gdy podane są złe dane
         window.alert("Błędne dane logowania");
         console.log('Login.ts Login fails');
