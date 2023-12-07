@@ -46,6 +46,7 @@ export class UserService {
   loggedUser:User = {} as User;
 
   constructor() {
+    console.log("user.service constructor");
     for(let i=0;i<this.dataUsers.length;i++){
       let napis:string = this.dataUsers[i][5].replace('-','');
       let liczba:number = parseInt(napis);

@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
-  providers:[UserService],
 })
 export class UsersComponent  implements OnInit{
   @Input() users!:User[];

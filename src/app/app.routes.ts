@@ -9,13 +9,19 @@ import { BlogComponent } from './blog/blog.component';
 import { UserComponent } from './user-folder/user/user.component';
 import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service';
+import { AuthenticationService } from './services/authentication.service';
 
 export const routes: Routes = [
+    { path: 'service', component: UserService},
+    { path: 'service', component: PostService},
+    { path: 'service', component: AuthenticationService},
     { path: 'show-user/:id', component: UserComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'login', component: LoginUserComponent },
     { path: 'register', component: RegisterUserComponent },
-    { path: '', component: BlogComponent},
+    { path: '', component: BlogComponent}
     // { path: '**', component: Component},
 ];
 

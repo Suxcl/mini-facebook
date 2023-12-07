@@ -14,7 +14,6 @@ import { User } from '../../models/user.model';
   imports: [PostComponent,CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.css',
-  providers: [PostService,AuthenticationService]
 })
 export class AddPostComponent implements OnInit{
   form4addpost:FormGroup;

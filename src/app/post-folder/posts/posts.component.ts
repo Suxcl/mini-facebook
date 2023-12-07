@@ -9,7 +9,6 @@ import { PostComponent } from "../post/post.component";
     standalone: true,
     templateUrl: './posts.component.html',
     styleUrl: './posts.component.css',
-    providers: [PostService],
     imports: [CommonModule, PostComponent]
 })
 export class PostsComponent implements OnInit{

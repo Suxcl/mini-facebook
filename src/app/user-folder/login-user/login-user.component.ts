@@ -14,7 +14,7 @@ import { User } from '../../models/user.model';
   imports: [CommonModule,FormsModule, ReactiveFormsModule],
   templateUrl: './login-user.component.html',
   styleUrl: './login-user.component.css',
-  providers:[UserService, NavbarComponent]
+  providers:[NavbarComponent]
 })
 export class LoginUserComponent implements OnInit{
   form4login:FormGroup;

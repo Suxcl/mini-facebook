@@ -11,16 +11,19 @@ import { PostsComponent } from "../post-folder/posts/posts.component";
 import { AddPostComponent } from "../post-folder/add-post/add-post.component";
 import { AuthenticationService } from '../services/authentication.service';
 import { PostService } from '../services/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, provideRouter } from '@angular/router';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { routes } from '../app.routes';
 
 @Component({
     selector: 'app-blog',
     standalone: true,
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.css',
-    providers: [UserService, PostService],
-    imports: [CommonModule, UsersComponent, PostsComponent, AddPostComponent]
+    imports: [PostsComponent, AddPostComponent, UsersComponent]
 })
+
+
 export class BlogComponent implements OnInit{
 
   users:User[] = [];
@@ -78,3 +81,7 @@ export class BlogComponent implements OnInit{
     this.posts.push(newpost);
   }
 }
+
+bootstrapApplication(BlogComponent,{
+  providers: [provideRouter(routes)]
+})

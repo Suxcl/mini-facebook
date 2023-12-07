@@ -15,6 +15,7 @@ export class PostService {
   Posts:Post[]=[];
 
   constructor() {
+    console.log("post.service constructor");
     for (let index = 0; index < this.dataPosts.length; index++) {
       const element = this.dataPosts[index];
       this.Posts.push(new Post(element[0],element[1]));

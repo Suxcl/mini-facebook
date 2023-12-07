@@ -1,6 +1,6 @@
 import { ApplicationRef, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Route, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Route, RouterLink, RouterLinkActive, RouterOutlet, provideRouter } from '@angular/router';
 import { Router } from '@angular/router';
 
 import { LoginUserComponent } from '../user-folder/login-user/login-user.component';
@@ -10,6 +10,8 @@ import { AuthenticationService } from '../services/authentication.service';
 
 
 import { User } from '../models/user.model';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { routes } from '../app.routes';
 
 
 @Component({
@@ -18,7 +20,6 @@ import { User } from '../models/user.model';
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, LoginUserComponent,RegisterUserComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
-  providers:[UserService, AuthenticationService],
 })
 export class NavbarComponent implements OnInit{
 
@@ -60,7 +61,5 @@ export class NavbarComponent implements OnInit{
     this.authenticationService.logout();
     console.log("wylogowano użytkownika");
   }
-
-
-
 }
+
