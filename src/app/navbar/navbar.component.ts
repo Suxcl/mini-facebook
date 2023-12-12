@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit{
 
   @Input() users!:User[];
   isLogged:boolean = false;
+  loggedUser:User | undefined;
+  userName:String | undefined;
 
   constructor(
     private router: Router,
@@ -36,6 +38,8 @@ export class NavbarComponent implements OnInit{
       this.authenticationService.refreshNavbarLogin$.subscribe(()=>{
         console.log("navbar.ts triggering refreshing");
         this.isLogged = true; 
+        this.loggedUser = authenticationService.getLoggedUser();
+        this.userName = this.loggedUser.Username;
         // this.isLogged = this.authenticationService.isSomeoneLoggedIn();
         //this.
   
@@ -45,6 +49,8 @@ export class NavbarComponent implements OnInit{
       this.authenticationService.refreshNavbarLogout$.subscribe(()=>{
         console.log("navbar.ts triggering refreshing");
         this.isLogged = false;
+        this.loggedUser = {}as User;
+        this.userName = {}as string;
       })
     }
 

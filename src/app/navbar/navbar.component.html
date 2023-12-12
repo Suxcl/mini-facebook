@@ -16,7 +16,7 @@
             <!-- When someone is logged -->
             <li>
                 <span *ngIf="isLogged">
-                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >Profil</a>      
+                    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" >Profil {{userName}}</a>      
                 </span>
             </li>
             <li>
