@@ -7,6 +7,7 @@ import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
 
 import { UserService } from '../services/user.service';
+import { DbManagerService } from '../services/db-manager.service';
 import { PostsComponent } from "../post-folder/posts/posts.component";
 import { AddPostComponent } from "../post-folder/add-post/add-post.component";
 import { AuthenticationService } from '../services/authentication.service';
@@ -14,6 +15,14 @@ import { PostService } from '../services/post.service';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { routes } from '../app.routes';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { HousingService } from '../services/housing.service';
+import { AppComponent } from '../app.component';
+import { Observable } from 'rxjs';
+
+
+
+
 
 @Component({
     selector: 'app-blog',
@@ -34,13 +43,15 @@ export class BlogComponent implements OnInit{
   constructor(
     private userService:UserService,
     private postService:PostService,
+    private dbMan:DbManagerService,
+    private housingService:HousingService,
     private auth:AuthenticationService,
     private route:ActivatedRoute,
     ){
       console.log("blog.ts constructor");
       this.users = this.userService.getUsers();
       this.posts = this.postService.getPosts();
-
+      
       
     }
 
@@ -49,6 +60,9 @@ export class BlogComponent implements OnInit{
     console.log("blog.ts OnInit");
     this.checkForNewUser();
     
+
+    // reading users from server
+    // this.users = this.housingService.getUsers2();    
   }
 
 
@@ -82,6 +96,6 @@ export class BlogComponent implements OnInit{
   }
 }
 
-bootstrapApplication(BlogComponent,{
-  providers: [provideRouter(routes)]
-})
+// bootstrapApplication(AppComponent,{
+//   providers: [provideRouter(routes)]
+// })

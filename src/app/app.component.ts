@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Routes, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 
 import { User } from './models/user.model';
@@ -14,12 +14,22 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserService } from './services/user.service';
 import { PostService } from './services/post.service';
 import { AuthenticationService} from './services/authentication.service';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, BlogComponent, NavbarComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet, 
+    RouterLink, 
+    RouterLinkActive, 
+    BlogComponent, 
+    NavbarComponent, 
+    HttpClientModule
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -34,7 +44,6 @@ export class AppComponent{
   constructor(
     private userService:UserService,
     private postService:PostService,
-    
     ){
 
       this.userService.addUser$.subscribe(()=>{
@@ -50,5 +59,7 @@ export class AppComponent{
     this.users = this.userService.getUsers();
     this.posts = this.postService.getPosts();
   }
-    
+  
+
 }
+

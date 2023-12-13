@@ -12,16 +12,19 @@ import { AppComponent } from './app.component';
 import { UserService } from './services/user.service';
 import { PostService } from './services/post.service';
 import { AuthenticationService } from './services/authentication.service';
+import { DbManagerService } from './services/db-manager.service';
 
 export const routes: Routes = [
     { path: 'service', component: UserService},
     { path: 'service', component: PostService},
     { path: 'service', component: AuthenticationService},
+    { path: 'service', component: DbManagerService},
     { path: 'show-user/:id', component: UserComponent },
     { path: 'edit-user/:id', component: EditUserComponent },
     { path: 'login', component: LoginUserComponent },
     { path: 'register', component: RegisterUserComponent },
-    { path: '', component: BlogComponent}
-    // { path: '**', component: Component},
+    { path: 'home', component: BlogComponent},
+    { path: '', redirectTo: '/home', pathMatch:'full'},
+    { path: '**', redirectTo: '/home'}
 ];
 
