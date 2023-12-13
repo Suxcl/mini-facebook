@@ -70,6 +70,7 @@ export class RegisterUserComponent implements OnInit {
   AddUser(){
     console.log("register.ts" + this.f);
     let newUser = new User(
+      this.userS.getUniqueId(),
       this.f.value.username,
       this.f.value.name,
       this.f.value.surname,
@@ -78,8 +79,8 @@ export class RegisterUserComponent implements OnInit {
       this.f.value.phoneNumber,
     );
     console.log("register.ts adding new user: "+newUser.Username);
-    // this.userS.addUser(newUser);
-    this.auth.register(newUser);
+    this.userS.addUser(newUser);
+    this.auth.login(newUser);
     this.router.navigate(
       ['/']
     );

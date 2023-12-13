@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, numberAttribute } from '@angular/core';
 import { HousingService } from './housing.service';
 import { User } from '../models/user.model';
+import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root'
 })
@@ -47,33 +48,28 @@ export class UserService {
   // ]
 
   Users:User[]=[];
-  loggedUser:User = {} as User;
+
 
   constructor(
     private housingService: HousingService,
   ) {
-
-    // tu jest przykład jak postować usera
-    // w całej apce trzeba dodac do modelu liste znajomych wydaje mi sie że uzyanie json stringify orazz parse nie będzie potrzebne bo to lista zwykła będzie
-    // this.housingService.postUser(new User('him','him','him','him','him',123123123));
     console.log("user.service constructor");
     console.log("user.service constructor reading users from db");
-    this.Users = this.housingService.getUsers();
-    // for(let i=0;i<this.dataUsers.length;i++){
-    //   let napis:string = this.dataUsers[i][5].replace('-','');
-    //   let liczba:number = parseInt(napis);
-    //   this.Users.push(new User(this.dataUsers[i][0],this.dataUsers[i][1],this.dataUsers[i][2],this.dataUsers[i][3],this.dataUsers[i][4],liczba))
-    // }
-    
+    this.Users = this.housingService.getUsers();    
   }
 
   getUsers():User[]{
     return this.Users;
   }
-  getUser(id:number):User{
-    return this.Users[id];
-  }
 
+  getUser(id:number):User{
+    for(let user of this.Users){
+      if (user.Id==id) {
+        return user;
+      }
+    }
+    return {} as User;
+  }
   getUserByUsername(username:string):User{
     for(let user of this.Users){
       if (user.Username==username) {
@@ -84,10 +80,12 @@ export class UserService {
   }
 
   addUser(user: User):void{
-    this.Users.push(user);
+    this.Users.push(user); // adding user to list in service
+    this.housingService.postUser(user); // add user to JSON server
     console.log("user.service " + this.Users );
-    this.refreshUsers$.emit();
+    // this.refreshUsers$.emit(); // emit event to refresh displays of users
   }
+
   updateUser(user:User, id:number):void{
     this.Users[id] = user;
     this.refreshUsers$.emit();
@@ -97,6 +95,8 @@ export class UserService {
     this.refreshUsers$.emit();
   }
 
-
+  getUniqueId():number{
+    return this.Users.length+1;
+  } 
 
 }

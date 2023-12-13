@@ -82,15 +82,16 @@ export class EditUserComponent implements OnInit {
   }
   doEditUser(){
     console.log('form', this.form4edit);
-    let userAfterEdit = new User(
-      this.form4edit.value.username,
-      this.form4edit.value.name,
-      this.form4edit.value.surname,
-      this.form4edit.value.password,
-      this.form4edit.value.email,
-      this.form4edit.value.phoneNumber,
-      );
-      this.doEditInParent.emit({user:userAfterEdit,which:this.selectedUser});
+
+    // let userAfterEdit = new User(
+    //   this.form4edit.value.username,
+    //   this.form4edit.value.name,
+    //   this.form4edit.value.surname,
+    //   this.form4edit.value.password,
+    //   this.form4edit.value.email,
+    //   this.form4edit.value.phoneNumber,
+    //   );
+    //   this.doEditInParent.emit({user:userAfterEdit,which:this.selectedUser});
   }
 
 }

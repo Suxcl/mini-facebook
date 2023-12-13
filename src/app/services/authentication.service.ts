@@ -8,7 +8,7 @@ export class AuthenticationService {
 
     // defining unlogged user as empty object of User
     user:User = {} as User;
-    NewUser:boolean = false;
+
     // event for refreshing navbar if someone logged in or unlogged
     public refreshNavbarLogin$: EventEmitter<void> = new EventEmitter<void>();
     public refreshNavbarLogout$: EventEmitter<void> = new EventEmitter<void>();
@@ -32,20 +32,12 @@ export class AuthenticationService {
         }
         
     }
+    
 
     login(u:User):void{ // for logging user into localStorage
         this.user = u;
         localStorage.setItem('currentUser', JSON.stringify(u));
         this.refreshNavbarLogin$.emit();
-    }
-    register(u:User):void{ // registering user, logging him and setting up for adding him to user list on blog.ts
-        this.user = u;
-        this.NewUser = true;
-        localStorage.setItem('currentUser', JSON.stringify(u));
-        this.refreshNavbarLogin$.emit();
-    }
-    changeNewUserToFalse():void{
-        this.NewUser = false;
     }
     logout():void{
         this.user = {} as User; 
@@ -62,9 +54,6 @@ export class AuthenticationService {
         }else{return true;}
     }
      
-    isNewUser():boolean{
-        return this.NewUser;
-    }
     // public triggerRefreshNavbar():void{
     //     this.refreshNavbar$.emit();
     // }

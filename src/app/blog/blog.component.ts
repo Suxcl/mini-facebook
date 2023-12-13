@@ -58,34 +58,11 @@ export class BlogComponent implements OnInit{
 
   ngOnInit(): void {  
     console.log("blog.ts OnInit");
-    this.checkForNewUser();
-    
-
-    // reading users from server
-    // this.users = this.housingService.getUsers2();    
   }
 
 
 
   // Users
-
-  getUsers():User[]{
-    return this.users;
-  }
-  
-
-  addUser(u:User){
-    this.users.push(u);
-  }
-
-  checkForNewUser():void{
-    // checking if there is a newly registered user
-    // if ther is adding him to usersList
-    if(this.auth.isNewUser()){
-      this.addUser(this.auth.getLoggedUser());
-      this.auth.changeNewUserToFalse();
-    }
-  }
 
   // Posts
 

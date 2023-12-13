@@ -40,11 +40,6 @@ export class NavbarComponent implements OnInit{
         this.isLogged = true; 
         this.loggedUser = authenticationService.getLoggedUser();
         this.userName = this.loggedUser.Username;
-        // this.isLogged = this.authenticationService.isSomeoneLoggedIn();
-        //this.
-  
-        // window.location.reload();
-        // router.navigate(['/']);
       })
       this.authenticationService.refreshNavbarLogout$.subscribe(()=>{
         console.log("navbar.ts triggering refreshing");

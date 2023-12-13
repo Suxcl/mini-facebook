@@ -1,21 +1,30 @@
 export class User{
-    private username!: string;
-    private name!: string;
+    private id!: number;
+    public username!: string;
+    public name!: string;
     private surname!: string;
     private password!: string;
     private email!:string;
     private phoneNumber!: number;
     private friendsList:User[];
-    // public registration_dat!:date;
+    public registration_dat!:Date;
     // public 
-    constructor(username:string, name:string, surname:string, password:string, email:string, phoneNumber:number ){
+    constructor(id:number,username:string, name:string, surname:string, password:string, email:string, phoneNumber:number){
+        this.id = id;
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.friendsList = [];
+        this.friendsList = []
+    }
+
+    get Id():number{
+        return this.id;
+    }
+    set Id(id:number){
+        this.id = id;
     }
 
     get Username():string{
@@ -53,6 +62,7 @@ export class User{
         this.email = email;
     }
 
+
     get PhoneNumber():number{
         return this.phoneNumber;
     }
@@ -60,11 +70,11 @@ export class User{
         this.phoneNumber=phonenumber;
     }
 
+
+    // friends handling
     get FriendsList():User[]{
         return this.friendsList;
     }
-
-
     getFriend(ind:number):User{
         return this.friendsList[ind];
     }
