@@ -55,7 +55,7 @@ export class UserService {
   ) {
     console.log("user.service constructor");
     console.log("user.service constructor reading users from db");
-    this.Users = this.housingService.getUsers();    
+    this.Users = this.housingService.getUsers();
   }
 
   getUsers():User[]{
@@ -78,14 +78,22 @@ export class UserService {
     console.log("THIS USERS: "+this.Users[nr]);
     return this.Users[nr];
   }
-  
+
   getUserByUsername(username:string):User{
     for(let user of this.Users){
       if (user.Username==username) {
         return user;
       }
-    } 
+    }
     return {} as User;
+  }
+
+  isUsernameTaken(username:string){
+    if (this.getUserByUsername(username) != {} as User) {
+      console.log(username+":"+ (this.getUserByUsername(username) != {} as User))
+      return false
+    }
+    return true
   }
 
   addUser(user: User):void{
@@ -116,6 +124,6 @@ export class UserService {
 
   getUniqueId():number{
     return this.Users.length+1;
-  } 
+  }
 
 }
