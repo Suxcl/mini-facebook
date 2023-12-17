@@ -17,12 +17,17 @@ export class AuthenticationService {
         console.log("auth.service constructor");
         try{
             // reading value from localStorage to identify if someone is logged in 
-            let userTMP:any = JSON.parse( localStorage.getItem('currentUser')|| "{}");
-            if(userTMP === "{}"){ userTMP = {} as User; }
+            let flop:any = localStorage.getItem('currentUser')
+            flop = JSON.parse(flop)
+            let userTMP:User = Object.setPrototypeOf(flop, User.prototype);
+            
+            // let userTMP:any = JSON.parse( localStorage.getItem('currentUser')|| "{}");
+            // if(userTMP === "{}"){ userTMP = {} as User; }
 
             // cheecking if reader value have keys
             if(Object.keys(userTMP).length != 0){
-                console.log("auth.service User is valid User")
+                console.log("auth.service User is valid User NIHGGER")
+                console.log("auth.service User:"+userTMP.Surname);
                 this.user = userTMP;
             }else{ // if ther is no keys there is no logged user
                 console.log("auth.service User is not valid User")
@@ -45,7 +50,7 @@ export class AuthenticationService {
         this.refreshNavbarLogout$.emit();
     }
     getLoggedUser():User{
-        console.log('auth.service getLoggedUser() user value: ' + this.user);
+        // console.log('auth.service getLoggedUser() user value: ' + this.user);
         return this.user;
     }
     isSomeoneLoggedIn():boolean{

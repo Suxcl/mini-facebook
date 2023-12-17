@@ -1,12 +1,14 @@
 export class Post {
+    private id:number;
     private username!: string;
     private content!: string;
     private comments!: Comment [];
 
-    constructor(username:string, content:string){
+    constructor( username:string, content:string){
         this.username = username;
         this.content = content;
         this.comments = [];
+        
     }
 
     //getters

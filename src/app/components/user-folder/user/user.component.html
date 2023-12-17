@@ -1,0 +1,53 @@
+<p>user works!</p>
+<p>{{this.user.Username}}</p>
+<p>{{this.user.Name}} {{this.user.Surname}}</p>
+<span  *ngIf="yourProfile">
+    <p>Witaj na swoim Profilu!</p>
+</span>
+
+<!-- always -->
+<!-- show friends -->
+<!-- CZEMU TO GÓWNO NIE DZIAŁA POMOCY -->
+<!-- <app-users [users]="getUserFriends()"></app-users> -->
+<!-- show posts of user -->
+<p>Tablica użytkownika</p>
+<app-posts [posts]="this.user_posts"></app-posts>
+
+<!-- if logged -->
+<!-- not your profile -->
+<!-- show add friend button or unfreind -->
+
+<span *ngIf="!yourProfile">
+    <p>Przycisk akcji Znajomych</p>
+    <span *ngIf="!isFriend">
+        <button (click)="addFriend()">Dodaj znajomego</button>
+    </span>    
+    <span *ngIf="isFriend">
+        <button (click)="removeFriend()">Usun znajomego</button>
+    </span>
+</span>
+
+<!-- friends panel -->
+
+<span *ngIf="yourProfile">
+    <p>Znajomi:</p>
+    <!-- <app-users [users]="this.user.FriendsList"></app-users> -->
+</span>
+
+<!-- requests list -->
+
+<span *ngIf="yourProfile">
+    <p>Lista zaproszeń</p>
+    <ul *ngFor="let request of this.requests" >
+        <li>{{request.from.Username}}</li>
+    </ul>
+</span>
+
+
+
+<!-- if your profile -->
+
+<!-- link to friend manager -->
+<!-- meybe some customization idk -->
+
+

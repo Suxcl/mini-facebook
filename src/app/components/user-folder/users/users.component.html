@@ -1,0 +1,10 @@
+<p [ngClass] = "'title'">Users List</p>
+
+<div class="container">
+    <div *ngFor="let user of users; index as i">
+        <span>
+        <a [routerLink]="['/show-user', i]">{{user.Name}} {{user.Surname}}</a>
+        </span>
+    </div>
+
+</div>

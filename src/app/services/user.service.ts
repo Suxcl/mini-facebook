@@ -2,6 +2,8 @@ import { EventEmitter, Injectable, numberAttribute } from '@angular/core';
 import { HousingService } from './housing.service';
 import { User } from '../models/user.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +12,6 @@ export class UserService {
   public refreshUsers$: EventEmitter<void> = new EventEmitter<void>();
 
   public addUser$: EventEmitter<{user:User}> = new EventEmitter<{user:User}>();
-
-  
-
 
   // dataUsers = [
   //   ["user1", "Jan", "Kowalski", "haslo123", "jan.kowalski@email.com", "123-456-7890"],
@@ -48,10 +47,11 @@ export class UserService {
   // ]
 
   Users:User[]=[];
-
+  private url = 'http://51.83.130.126:3000';
 
   constructor(
     private housingService: HousingService,
+    private httpClient: HttpClient,
   ) {
     console.log("user.service constructor");
     console.log("user.service constructor reading users from db");
@@ -61,8 +61,11 @@ export class UserService {
   getUsers():User[]{
     return this.Users;
   }
+  getUsersObs():Observable<any>{
+    return this.httpClient.get<any>(this.url+'/Users')
+  }
 
-  getUser(id:number):User{
+  getUserbyId(id:number):User{
     for(let user of this.Users){
       if (user.Id==id) {
         return user;
@@ -70,6 +73,12 @@ export class UserService {
     }
     return {} as User;
   }
+  getUserByIndexFromList(nr:number):User{
+    console.log("THIS USERS: "+this.Users);
+    console.log("THIS USERS: "+this.Users[nr]);
+    return this.Users[nr];
+  }
+  
   getUserByUsername(username:string):User{
     for(let user of this.Users){
       if (user.Username==username) {

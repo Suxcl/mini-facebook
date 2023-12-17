@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,17 @@ export class PostService {
   getPosts():Post[]{
     return this.Posts;
   };
+  
+  getPostsOfUser(u:User):Post[]{
+    let surname:string = u.Username;
+    let tmp:Post[] = [];
+    this.Posts.forEach(element => {
+      if(surname === element.Username){
+        tmp.push(element);
+      }
+    });
+    return tmp;
+  }
 
 
 

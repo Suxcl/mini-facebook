@@ -7,8 +7,8 @@ export class User{
     private email!:string;
     private phoneNumber!: number;
     private friendsList:User[];
-    public registration_dat!:Date;
-    // public 
+    
+    
     constructor(id:number,username:string, name:string, surname:string, password:string, email:string, phoneNumber:number){
         this.id = id;
         this.username = username;
@@ -70,8 +70,6 @@ export class User{
         this.phoneNumber=phonenumber;
     }
 
-
-    // friends handling
     get FriendsList():User[]{
         return this.friendsList;
     }
