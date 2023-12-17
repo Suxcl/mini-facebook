@@ -11,27 +11,17 @@ export class Post {
 
 
     
-    // public constructor(id:number ,username:string, content:string){
-    //     this.id = id;
-    //     this.username = username;
-    //     this.content = content;
-    //     this.comments = [];
-    //     this.comments_count = this.comments.length;
-    //     this.likes = 0;
-    //     this.dislikes = 0;
-    //     this.img = [];
+    public constructor(id:number ,username:string, content:string){
+        this.id = id;
+        this.username = username;
+        this.content = content;
+        this.comments = [];
+        this.comments_count = this.comments.length;
+        this.likes = 0;
+        this.dislikes = 0;
+        this.img = [];
+    }
 
-    // }
-    // public constructor(id:number ,username:string, content:string, comments?:Comment[], likes?:number, dislikes?:number, img?:string[]){
-    //     this.id = id;
-    //     this.username = username;
-    //     this.content = content;
-    //     this.comments = comments;
-    //     this.comments_count = comments.length;
-    //     this.likes = likes;
-    //     this.dislikes = dislikes;
-    //     this.img = img;
-    // }
 
     //getters
     public get Username() : string {
@@ -58,6 +48,9 @@ export class Post {
 
     public set Content(v : string) {
         this.content = v;
+    }
+    public set Id(v : number){
+        this.id = v;
     }
 
     //comment

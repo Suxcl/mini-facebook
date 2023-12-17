@@ -69,7 +69,7 @@ export class BlogComponent implements OnInit{
   addPost(newpost:Post){
     console.log('blog.ts addPost metod '+newpost.Username);
     console.log('blog.ts addPost metod '+newpost.Content);
-    this.housingService.postPost(newpost);
+    this.housingService.postData('Posts',newpost);
     //this.posts = this.postService.getPosts();
     // this.posts.push(newpost);
   }

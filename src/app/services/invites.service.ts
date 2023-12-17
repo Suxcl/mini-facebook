@@ -14,17 +14,15 @@ export class InvitesService{
   ) {
     console.log("user.service constructor");
     console.log("user.service constructor reading users from db");
-    this.Invites = this.housingService.getInvites();    
+    this.Invites = this.housingService.getData('Invitations');    
    }
-
-
 
   addInvite(i:Invitation):void{
     if(this.Invites.includes(i)){
       
     }
     this.Invites.push(i);
-    this.housingService.postInvite(i);
+    this.housingService.postData('Invitations',i);
   }
   // removeInvite(i:Invitation):void{
   //   this.Invites.slice(i, 1)

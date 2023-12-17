@@ -22,7 +22,7 @@ export class PostService {
     private httpClient: HttpClient,
     ) {
     console.log("post.service constructor");
-    this.Posts = this.housingService.getPosts();
+    this.Posts = this.housingService.getData('Posts');
     // for (let index = 0; index < this.dataPosts.length; index++) {
     //   const element = this.dataPosts[index];
     //   this.Posts.push(new Post(this.getUniqueId(),element[0],element[1]));
