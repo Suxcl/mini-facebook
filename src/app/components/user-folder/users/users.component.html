@@ -1,8 +1,11 @@
 <p [ngClass] = "'title'">Users List</p>
 
 <div class="container">
-    <div *ngFor="let user of users; index as i" [routerLink]="['/show-user', i]" class="user-container">
-        {{user.Name}} {{user.Surname}}
+    <div class="inputs">
+    <label>Search: </label> <input type="text" [(ngModel)]="searchString" />
+    </div>
+    <div *ngFor="let user of users | searchUsers:searchString; index as i" [routerLink]="['/show-user', i]" class="user-container">
+        {{user.Username}}
     </div>
 
 </div>

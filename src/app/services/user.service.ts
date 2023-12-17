@@ -44,14 +44,22 @@ export class UserService {
   getUserByIndexFromList(nr:number):User{
     return this.Users[nr];
   }
-  
+
   getUserByUsername(username:string):User{
     for(let user of this.Users){
       if (user.Username==username) {
         return user;
       }
-    } 
+    }
     return {} as User;
+  }
+
+  isUsernameTaken(username:string){
+    if (this.getUserByUsername(username) != {} as User) {
+      console.log(username+":"+ (this.getUserByUsername(username) != {} as User))
+      return false
+    }
+    return true
   }
 
   addUser(user: User):void{
@@ -82,6 +90,6 @@ export class UserService {
 
   getUniqueId():number{
     return this.Users.length+1;
-  } 
+  }
 
 }

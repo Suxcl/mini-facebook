@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../../models/user.model';
@@ -12,6 +12,8 @@ import { AuthenticationService } from '../../../services/authentication.service'
 // validators
 import { uniqueUsernameValidator } from '../../../validators/uniqueUsernameValidator';
 import { state } from '@angular/animations';
+import { Observable } from 'rxjs/internal/Observable';
+import { delay, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-register-user',
@@ -31,37 +33,44 @@ export class RegisterUserComponent implements OnInit {
     private fb:FormBuilder) {
       console.log("register.ts constructor");
       this.f = fb.group({
-        username: 
-          [ '',
-            Validators.required,
-            Validators.minLength(5),
-            Validators.maxLength(50),
-            uniqueUsernameValidator(userS)
+        username:
+          [ null,
+            {
+            validators: [Validators.required, Validators.minLength(5), Validators.maxLength(50)],
+            asyncValidators: [this.usernameValidator()]
+            }
           ],
         password: [
-          '',
-          Validators.required,
+          null,
+          {
+            validators: [Validators.required]
+          }
           //   Validators.minLength(8),
           //   // custom validator for password strenght
         ],
         name: [
-          '',
-          Validators.required,
-          Validators.maxLength(50)
+          null,
+          {
+            validators:[Validators.required,Validators.maxLength(50)]
+          }
         ],
         surname: [
-          '',
-          Validators.required,
-          Validators.maxLength(50)
+          null,
+          {
+            validators:[Validators.required,Validators.maxLength(50)]
+          }
         ],
         email: [
-          '',
-          Validators.required,
-          Validators.email
+          null,
+          {
+            validators:[Validators.required,Validators.email]
+          }
         ],
         phoneNumber: [
-          '',
-          Validators.required,
+          null,
+          {
+            validators:[Validators.required]
+          }
           //custom validator for checking number size
         ]
       });
@@ -84,10 +93,28 @@ export class RegisterUserComponent implements OnInit {
     this.router.navigate(
       ['/']
     );
-    
+
   };
 
-  
+  usernameValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.checkIfUsernameExists(control.value).pipe(
+        map(res => {
+          // if res is true, username exists, return true
+          return res ? { usernameExists: true } : null;
+          // NB: Return null if there is no error
+        })
+      );
+    };
+  }
+
+  checkIfUsernameExists(username:string):Observable<boolean>{
+    return of(this.userS.isUsernameTaken(username)).pipe(delay(1000));
+  }
+
+
+
+
   ngOnInit(): void {
     console.log('register.ts onInit');
     // clearowanie elemntów formularza z powopdu wyświetlania
