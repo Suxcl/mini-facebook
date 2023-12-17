@@ -90,7 +90,7 @@ export class UserComponent implements OnChanges{
     this.invitesService.addInvite(i);
   }
   removeFriend():void{
-    
+    this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
   }
   getRequests():Invitation[]{
     let tmp:Invitation[] = this.invitesService.getInvites(this.user);

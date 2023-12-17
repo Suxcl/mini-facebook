@@ -120,7 +120,7 @@ getInvites(): Invitation[]{
   this.httpClient.get<any[]>(this.url+'/Invites').subscribe((data: any[]) => {
       data.forEach(elem=> {
           let inv:Invitation = JSON.parse(elem['body']) as Invitation
-          inv  = Object.setPrototypeOf(inv, User.prototype);
+          inv  = Object.setPrototypeOf(inv, Invitation.prototype);
           let id_on_server:number = parseInt(elem['id']);
           // changing id value for user to be the same on the Server and in models
           // this is required becouse of DELETE and PUT which needs specific index on server

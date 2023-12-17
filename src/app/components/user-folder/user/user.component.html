@@ -17,15 +17,15 @@
 <!-- not your profile -->
 <!-- show add friend button or unfreind -->
 
-<span *ngIf="!yourProfile">
+<!-- <span *ngIf="!yourProfile"> -->
     <p>Przycisk akcji Znajomych</p>
-    <span *ngIf="!isFriend">
+    <span *ngIf="isFriend">
         <button (click)="addFriend()">Dodaj znajomego</button>
     </span>    
-    <span *ngIf="isFriend">
+    <span *ngIf="!isFriend">
         <button (click)="removeFriend()">Usun znajomego</button>
     </span>
-</span>
+<!-- </span> -->
 
 <!-- friends panel -->
 

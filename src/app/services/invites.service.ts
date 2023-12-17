@@ -20,7 +20,11 @@ export class InvitesService{
 
 
   addInvite(i:Invitation):void{
+    if(this.Invites.includes(i)){
+      
+    }
     this.Invites.push(i);
+    this.housingService.postInvite(i);
   }
   // removeInvite(i:Invitation):void{
   //   this.Invites.slice(i, 1)

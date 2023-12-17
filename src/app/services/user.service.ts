@@ -92,7 +92,7 @@ export class UserService {
     this.Users.push(user); // adding user to list in service
     this.housingService.postUser(user); // add user to JSON server
     console.log("user.service " + this.Users );
-    // this.refreshUsers$.emit(); // emit event to refresh displays of users
+    this.refreshUsers$.emit(); // emit event to refresh displays of users
   }
 
   updateUser(user:User, id:number):void{
@@ -101,6 +101,16 @@ export class UserService {
   }
   removeUser(id:number):void{
     delete this.Users[id];
+    this.refreshUsers$.emit();
+  }
+
+  removeFriend(u:User, u2:User):void{
+    for(let el of this.Users){
+      if(el.Surname==u.Surname){
+        el.FriendsList.splice(el.FriendsList.indexOf(u2), 1);
+      }
+    }
+    this.housingService.putUser(u)
     this.refreshUsers$.emit();
   }
 
