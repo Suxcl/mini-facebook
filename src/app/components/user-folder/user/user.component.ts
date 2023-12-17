@@ -86,7 +86,7 @@ export class UserComponent implements OnChanges{
 
 
   addFriend():void{
-    let i:Invitation = new Invitation(this.auth.getLoggedUser(), this.user);
+    let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
   }
   removeFriend():void{

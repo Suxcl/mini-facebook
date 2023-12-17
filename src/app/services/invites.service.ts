@@ -14,7 +14,7 @@ export class InvitesService{
   ) {
     console.log("user.service constructor");
     console.log("user.service constructor reading users from db");
-    // this.Invites = this.housingService.getInvites();    
+    this.Invites = this.housingService.getInvites();    
    }
 
 

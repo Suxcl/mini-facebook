@@ -92,15 +92,15 @@ getInvites(): Invitation[]{
           // this is required becouse of DELETE and PUT which needs specific index on server
           if(id_on_server != inv.Id){ 
             inv.Id = id_on_server;
-            this.putInvite(user);
+            this.putInvite(inv);
           }
-          UserList.push(user);
+          invList.push(inv);
       });
-      console.log(`housing.service get Users succesfull`);
-      console.log(UserList);
+      console.log(`housing.service get Users successful`);
+      console.log(invList);
     }
   )
-  return UserList;
+  return invList;
 }
 postInvite(i:Invitation):void{
   console.log('houseing.service posting new Invite', i);
@@ -108,7 +108,7 @@ postInvite(i:Invitation):void{
   this.httpClient.post<any>(this.url+'/Invites', {
     body: data_string
   }).subscribe(data => {
-    console.log(`housing.service post User ${i} succesfull`);
+    console.log(`housing.service post User ${i} successful`);
   });
 }
 putInvite(i:Invitation):void{
@@ -118,7 +118,7 @@ putInvite(i:Invitation):void{
   this.httpClient.put<any>(this.url+'/Invites'+elem_id, {
     body: data_string
   }).subscribe(data => {
-    console.log(`housing.service put User ${i}} succesfull`);
+    console.log(`housing.service put User ${i}} successful`);
   });
 }
 
