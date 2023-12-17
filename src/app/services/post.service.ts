@@ -1,5 +1,6 @@
 import { HousingService } from './housing.service';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Post } from '../models/post.model';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
@@ -8,30 +9,31 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PostService {
-  // dataPosts = [
-  //   ["user1","posttttt"],
-  //   ["user2","posttttt"],
-  //   ["user3","posttttt"],
-  //   ["user4","posttttt"]
-  // ]
 
+  public refreshPosts$: EventEmitter<void> = new EventEmitter<void>();
   Posts:Post[]=[];
+  PostsSubject$ = new BehaviorSubject<Post[]>([]);
 
   constructor(
     private housingService: HousingService,
     private httpClient: HttpClient,
     ) {
+
     console.log("post.service constructor");
-    this.Posts = this.housingService.getData('Posts');
-    // for (let index = 0; index < this.dataPosts.length; index++) {
-    //   const element = this.dataPosts[index];
-    //   this.Posts.push(new Post(this.getUniqueId(),element[0],element[1]));
-    // }
+    this.updatePosts(this.housingService.getData('Posts'));
   }
 
   getPosts():Post[]{
     return this.Posts;
   };
+  getPostsAsObservable():Observable<any>{
+    return this.PostsSubject$.asObservable();
+  }
+  updatePosts(posts:Post[]){
+    this.Posts = posts;
+    this.PostsSubject$.next(posts);
+  }
+
 
   getPostsOfUser(u:User):Post[]{
     let surname:string = u.Username;

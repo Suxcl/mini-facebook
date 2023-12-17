@@ -1,28 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
 import { Invitation } from '../models/invitation.model';
 import { HousingService } from './housing.service';
 import { User } from '../models/user.model';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { statuses } from '../models/invitation.model';
 @Injectable({
   providedIn: 'root'
 })
 export class InvitesService{
+  public refreshInvites$: EventEmitter<void> = new EventEmitter<void>();
 
   Invites:Invitation[] = []
+  InvitesSubject = new BehaviorSubject<Invitation[]>([]);
+
   constructor(
     private housingService:HousingService,
   ) {
     console.log("user.service constructor");
+    this.updateInvites(this.housingService.getData('Invites'));
     
-    this.Invites = this.housingService.getData('Invites');    
-    console.log("user.service constructor read invites from db");
    }
 
   addInvite(i:Invitation):void{
-    
     if(!(this.Invites.filter((Invite)=>Invite.from === i.from && Invite.to === i.to).length == 0)){
       this.Invites.push(i);
       this.housingService.postData('Invites',i);
+      
     }
     
   }
@@ -54,7 +57,7 @@ export class InvitesService{
     return tmpList;
   }
 
-  getInvites(u:User, nr:number=0):Invitation[]{
+  getInvites(u:User, nr:number=0){
     let tmpList:Invitation[] = []
     if (nr === 0){
       this.Invites.forEach(element => {
@@ -69,7 +72,14 @@ export class InvitesService{
         }
       });
     }
+    // this.updateInvites(tmpList);
     return tmpList;
   }
-  
+  updateInvites(invites:Invitation[]){
+    this.Invites = invites;
+    this.InvitesSubject.next(this.Invites);
+  }
+  getInvitesAsObservable():Observable<any>{
+    return this.InvitesSubject.asObservable();
+  }
 }

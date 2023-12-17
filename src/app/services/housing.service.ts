@@ -9,6 +9,10 @@ import { Post } from '../models/post.model';
 import { Comment } from '../models/comment.model';
 import { Invitation } from '../models/invitation.model';
 
+// import { UserService } from './user.service';
+// import { PostService } from './post.service';
+// import { CommentsService } from './comments.service';
+// import { InvitesService } from './invites.service';
 
 @Injectable({
   providedIn: 'root'
@@ -90,11 +94,6 @@ export class HousingService {
   }
 
 
-
-
-
-
-
   // --- Users ---
 
   getUsers() : User[]{
@@ -136,13 +135,13 @@ export class HousingService {
     this.httpClient.put<any>(this.url+'/Users/'+user_id, {
       body: user_string
     }).subscribe(data => {
-      console.log(`housing.service put User ${u} succesfull`);
+      console.log(`housing.service put User ${u} successful`);
     });
   }
   deleteUser(id:number):void{
     console.log('housing.service delete User: '+id);
     this.httpClient.delete<any>(`${this.url}/Users/${id}`).subscribe(()=>{
-      console.log("housing.service succesfull delete of User: "+id);
+      console.log("housing.service succecsful delete of User: "+id);
     });
   }
 

@@ -14,6 +14,7 @@ import { Invitation } from '../../../models/invitation.model';
 import { PostsComponent } from '../../post-folder/posts/posts.component';
 
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './user.component.css',
   imports: [UsersComponent, PostsComponent, CommonModule]
 })
-export class UserComponent implements OnChanges{
+export class UserComponent implements OnInit{
   user!:User;
   yourProfile:Boolean = false;
   user_posts:Post[] = [];
@@ -39,27 +40,27 @@ export class UserComponent implements OnChanges{
     
   ){
     console.log("user.ts constructor");
-
-    // reading end of route value
+    this.invitesService.getInvitesAsObservable().subscribe((updatedInv) => {
+      this.requests = updatedInv;
+    });
+  
     
+  }
+  ngOnInit(): void {
+    console.log("user.ts OnInit");
     const whichStudent = this.route.snapshot.paramMap.get('id');
     console.log("user.ts Getting user index from path: "+whichStudent);
 
     // getting user from previously reded id
     let check:User = this.userService.getUserByIndexFromList(Number(whichStudent));
     console.log("user.ts Show-User user data: "+Object.values(check));
-
-  
     if(check!=undefined){
       this.user = check;
-      this.user_posts = this.postService.getPostsOfUser(check);
       let logUser = this.auth.getLoggedUser();
-      this.requests = this.invitesService.getInvites(this.user);
+
       // logs for testing
       console.log('user.ts User posts: '+this.user_posts);
       console.log('user.ts User Friends: '+this.user.FriendsList);
-      
-      
       
       // if user is logged in changing yourProfile accordingly
       if(this.user.Surname === logUser.Surname){
@@ -76,15 +77,6 @@ export class UserComponent implements OnChanges{
       this.user_friends = this.user.FriendsList;
     }
   }
-
-
-  ngOnChanges(): void {
-    // console.log('user.ts onInit');
-  
-  }
-
-
-
   addFriend():void{
     let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
@@ -93,8 +85,11 @@ export class UserComponent implements OnChanges{
     this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
   }
   getRequests():Invitation[]{
-    let tmp:Invitation[] = this.invitesService.getInvites(this.user);
-    return tmp;
+    let t = this.invitesService.getInvites(this.user);
+    if(t===undefined){
+      return []
+    }
+    return t;
   }
   getUserFriends():User[]{
     let tmp = this.user.FriendsList;
@@ -116,5 +111,6 @@ export class UserComponent implements OnChanges{
       }
     }
   }
-  
+
 }
+

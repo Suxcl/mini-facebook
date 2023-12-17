@@ -39,7 +39,13 @@
 <span *ngIf="yourProfile">
     <p>Lista zaproszeń</p>
     <ul *ngFor="let request of this.requests" >
-        <li>{{request.from.Username}}</li>
+        <li>
+            Id {{request.Id}} 
+            Status {{request.status}}
+            {{request.from.username}}
+            {{request.to.username}}
+        </li>
+        
     </ul>
 </span>
 

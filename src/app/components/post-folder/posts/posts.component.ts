@@ -14,10 +14,20 @@ import { PostComponent } from "../post/post.component";
 export class PostsComponent implements OnInit{
   @Input() posts!:Post[];
 
-  constructor(private postService:PostService) {}
+  constructor
+  (
+    private postService:PostService
+  ) 
+  {
+    this.postService.getPostsAsObservable().subscribe((update) => {
+      console.log("posts.ts update: "+update);
+      this.posts = update;
+    });
+  }
 
   ngOnInit(): void {
     console.log("posts.ts component On Init");
+
   }
   
   
