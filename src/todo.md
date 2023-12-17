@@ -17,7 +17,7 @@
 
 # Z CEZA do zrobienia
 
-walidacja danych wprowadzanych przez użytkownika ( w każdym przypadku wprowadzania danych, czy odpowiednio dobrano walidatory) - 2pkt,
+
 
 modyfikacja danych odbywa się tylko w jednym komponencie - 1pkt - nie wiem nie rozumiem
 dane pochodzące z jednej klasy usługi - 1pkt - też nie rozumiem
@@ -35,6 +35,8 @@ routing (ścieżki 'routes', w tym jedna z parametrem, operacje na obiekcie Acti
 
 
 # donzo Z CEZA 
+
+- (chyba zrobione) walidacja danych wprowadzanych przez użytkownika ( w każdym przypadku wprowadzania danych, czy odpowiednio dobrano walidatory) - 2pkt,
 
 klasa TypeScript (czy zdefiniowano i zastosowano klasę do organizacji danych, czy pola w klasie są prywatne ) - 1pkt
 typy TypeScript (czy każda zmienna ma przyporządkowany typ) - 1pkt

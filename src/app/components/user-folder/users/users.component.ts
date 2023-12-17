@@ -9,6 +9,8 @@ import { UserComponent } from '../user/user.component';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { FormsModule } from '@angular/forms';
 
+import { SearchUsersPipe } from '../../../pipes/search-users.pipe';
+
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -16,13 +18,15 @@ import { FormsModule } from '@angular/forms';
     UserComponent,
     EditUserComponent,
     RouterModule,
-    FormsModule],
+    FormsModule,
+    SearchUsersPipe],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
 export class UsersComponent  implements OnInit{
   @Input() users!:User[];
   selected:number;
+  searchString:string = "";
 
 
   constructor(
@@ -31,7 +35,7 @@ export class UsersComponent  implements OnInit{
   ){
     this.selected = -1;
     console.log("users.ts constructor");
-    
+
   }
 
   public select(which:number):void {
@@ -58,7 +62,7 @@ export class UsersComponent  implements OnInit{
     this.router.navigate(['/show-user',index]);
   }
 
-  
+
 
   ngOnInit(): void {
   }
