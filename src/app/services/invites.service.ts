@@ -13,20 +13,19 @@ export class InvitesService{
     private housingService:HousingService,
   ) {
     console.log("user.service constructor");
-    console.log("user.service constructor reading users from db");
-    this.Invites = this.housingService.getData('Invitations');    
+    
+    this.Invites = this.housingService.getData('Invites');    
+    console.log("user.service constructor read invites from db");
    }
 
   addInvite(i:Invitation):void{
-    if(this.Invites.includes(i)){
-      
+    
+    if(!(this.Invites.filter((Invite)=>Invite.from === i.from && Invite.to === i.to).length == 0)){
+      this.Invites.push(i);
+      this.housingService.postData('Invites',i);
     }
-    this.Invites.push(i);
-    this.housingService.postData('Invitations',i);
+    
   }
-  // removeInvite(i:Invitation):void{
-  //   this.Invites.slice(i, 1)
-  // }
   changeStatus(i:Invitation, status_to:number):void{
     this.Invites.forEach(element => {
       if(element.from === i.from && element.to === i.to){

@@ -24,6 +24,7 @@ export class HousingService {
    }
   // http requests that handle all data types
   // on calling requires the name of the data type
+  // which: Users, Posts, Comment, Invites
   getData(which:string) : any[]{
     let dataList:any[]=[];
     this.httpClient.get<any[]>(this.url+`/${which}`).subscribe((data: any[])=>{
@@ -44,11 +45,12 @@ export class HousingService {
             objectData = JSON.parse(elem['body']) as Comment
             objectData = Object.setPrototypeOf(objectData, Comment.prototype);
             break
-          case 'Invitations':
+          case 'Invites':
             objectData = JSON.parse(elem['body']) as Invitation
             objectData = Object.setPrototypeOf(objectData, Invitation.prototype);
             break
         }
+        
         if(id_on_server != objectData.Id){
           objectData.Id = id_on_server;
           this.putData(which,objectData);
