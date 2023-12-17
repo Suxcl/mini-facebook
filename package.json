@@ -20,6 +20,7 @@
     "@angular/router": "^17.0.0",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
+    "hosting": "^0.0.2",
     "node": "^21.2.0",
     "rxjs": "~7.8.0",
     "uuid": "^9.0.1",

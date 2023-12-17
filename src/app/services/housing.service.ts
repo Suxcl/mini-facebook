@@ -35,7 +35,7 @@ export class HousingService {
             let id_on_server:number = parseInt(elem['id']);
             // changing id value for user to be the same on the Server and in models
             // this is required becouse of DELETE and PUT which needs specific index on server
-            if(id_on_server != user.Id){ 
+            if(id_on_server != user.Id){
               user.Id = id_on_server;
               this.putUser(user);
             }
@@ -75,12 +75,46 @@ export class HousingService {
   }
 
   // --- Posts ---
+
+  getPosts() : Post[]{
+    let PostList:Post[]=[];
+    this.httpClient.get<any[]>(this.url+'/Posts').subscribe((data: any[])=>{
+      data.forEach(elem=>{
+        console.log(elem);
+        let id = elem['id'];
+        let username = elem['username'];
+        let content = elem['content'];
+        let comments = elem['comments'];
+        console.log(id," ",username," ",content," ",comments)
+        let post:Post = new Post(id,username,content);
+
+        PostList.push(post);
+      });
+      console.log(`housing.service get Posts succesfull`);
+      console.log(PostList);
+    });
+    return PostList;
+  }
+
+  postPost(post:Post):void{
+    console.log('housing.service posting new Post');
+    this.httpClient.post<any>(this.url+'/Posts',{
+      id: post.Id,
+      username: post.Username,
+      content: post.Content,
+      comments: post.Comments
+    }).subscribe(data=>{
+      console.log(`housing.service post Post ${post} succesfull`);
+    });
+
+  }
+
   // --- Comments ---
   // --- Invits ---
 
 
 getInvites(): Invitation[]{
-  
+
   console.log("housing.service get Invitations");
   let invList:Invitation[] = [];
   this.httpClient.get<any[]>(this.url+'/Invites').subscribe((data: any[]) => {
@@ -90,7 +124,7 @@ getInvites(): Invitation[]{
           let id_on_server:number = parseInt(elem['id']);
           // changing id value for user to be the same on the Server and in models
           // this is required becouse of DELETE and PUT which needs specific index on server
-          if(id_on_server != inv.Id){ 
+          if(id_on_server != inv.Id){
             inv.Id = id_on_server;
             this.putInvite(inv);
           }

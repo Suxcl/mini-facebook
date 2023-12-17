@@ -31,26 +31,26 @@ export class AddPostComponent implements OnInit{
       // title:['', Validators.required,Validators.maxLength(50)],
       content: ['']
     })
-    
+
   }
 
   ngOnInit(): void {
     console.log("add-post initialised");
   }
-  
+
   doAddPost(){
     console.log('addPost form', this.form4addpost);
     if (this.authenticationService.isSomeoneLoggedIn()) {
       let user = this.authenticationService.getLoggedUser();
       this.user = this.authenticationService.getLoggedUser();
 
-      console.log("add-post.ts user " + Object.keys(user) , Object.values(user));
-      console.log('add-post.ts user username' + user.Username);
-      
+      // console.log("add-post.ts user " + Object.keys(user) , Object.values(user));
+      // console.log('add-post.ts user username' + user.Username);
+
       console.log("add-post.ts user " + Object.keys(this.user) , Object.values(user));
       console.log('add-post.ts user username ' + this.user.Username);
-      let p:Post  = new Post(user.Username, this.form4addpost.value.content);
-      this.addPostInParent.emit({newPost: p});  
+      let p:Post  = new Post(this.postService.getUniqueId(),user.Username, this.form4addpost.value.content);
+      this.addPostInParent.emit({newPost: p});
     }else{
       console.log('add post no user ERR');
     }

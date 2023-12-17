@@ -49,14 +49,14 @@ export class BlogComponent implements OnInit{
       this.users = this.userService.getUsers();
       this.posts = this.postService.getPosts();
       this.logged = this.auth.getLoggedUser();
-      
 
-      
+
+
 
     }
 
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     console.log("blog.ts OnInit");
   }
 
@@ -69,7 +69,9 @@ export class BlogComponent implements OnInit{
   addPost(newpost:Post){
     console.log('blog.ts addPost metod '+newpost.Username);
     console.log('blog.ts addPost metod '+newpost.Content);
-    this.posts.push(newpost);
+    this.housingService.postPost(newpost);
+    //this.posts = this.postService.getPosts();
+    // this.posts.push(newpost);
   }
 }
 
