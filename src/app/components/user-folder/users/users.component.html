@@ -5,7 +5,7 @@
     <label>Search: </label> <input type="text" [(ngModel)]="searchString" />
     </div>
     <div *ngFor="let user of users | searchUsers:searchString; index as i" [routerLink]="['/show-user', i]" class="user-container">
-        {{user.Name}} {{user.Surname}}
+        {{user.Username}}
     </div>
 
 </div>
