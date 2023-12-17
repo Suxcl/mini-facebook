@@ -1,0 +1,11 @@
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+li{
+  margin: 5px;
+}
+li:last-child{
+  border: 1px gray solid;
+  border-radius: 3px;
+}

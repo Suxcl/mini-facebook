@@ -1,5 +1,15 @@
-<form [formGroup]="form4addpost" (ngSubmit)="doAddPost()">
-    <label for="content">Content: </label><br>
-    <input type="text" formControlName="content"><br>
-    <input [disabled]="form4addpost.invalid" type="submit" value="Dodaj Post">
-</form>
+<div class="container">
+  <form [formGroup]="form4addpost" (ngSubmit)="doAddPost()">
+    <div class="inputs">
+      <label for="content">Content: </label><br />
+      <input type="text" formControlName="content" /><br />
+    </div>
+    <div class="actions">
+      <input
+        [disabled]="form4addpost.invalid"
+        type="submit"
+        value="Dodaj Post"
+      />
+    </div>
+  </form>
+</div>
