@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
   selector: 'app-post',
   styleUrls: ['./post.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, PostDateDirective, CommentComponent, CommentsComponent],
   templateUrl: './post.component.html',
 })
 export class PostComponent {
