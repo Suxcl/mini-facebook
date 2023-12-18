@@ -35,13 +35,13 @@ export class UserService {
     return this.Users[nr];
   }
 
-  getUserByUsername(username:string):User | null{
+  getUserByUsername(username:string):User{
     for(let user of this.Users){
-      if (user.Username==username) {
+      if (user.Username===username) {
         return user;
       }
     }
-    return null;
+    return {} as User;
   }
   getUserIndex(user:User):number{
     return this.Users.indexOf(user);
