@@ -17,7 +17,10 @@
             <!-- component for adding new post -->
             <app-add-post ></app-add-post>
             <!-- component for listing posts -->
-            <app-posts [posts]="this.posts"></app-posts>
+            <app-posts 
+                [posts]="this.posts"
+                [your_profile]="false"
+            ></app-posts>
             
         
         </main>

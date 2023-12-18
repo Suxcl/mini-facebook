@@ -16,6 +16,7 @@ import { PostsComponent } from '../../post-folder/posts/posts.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -29,6 +30,7 @@ export class UserComponent implements OnInit{
   user_posts:Post[] = [];
   user_friends:User[] = [];
   requests:Invitation[] = [];
+  allRequests:Invitation[] = [];
 
   
   constructor(
@@ -40,38 +42,45 @@ export class UserComponent implements OnInit{
     
   ){
     console.log("user.ts constructor");    
-  }
-  ngOnInit(): void {
-    console.log("user.ts OnInit");
+    console.log("user.ts constructor", this.postService.getPosts());    
+    console.log("user.ts constructor", this.invitesService.getAllInvites());    
     const whichStudent = this.route.snapshot.paramMap.get('id');
-    console.log("user.ts Getting user index from path: "+whichStudent);
+    
+    this.user = this.userService.getUserByIndexFromList(Number(whichStudent));
+    // console.log('user.ts User : '+this.user);
+    this.user_posts = this.postService.getUserPosts(this.user);
+    // console.log('user.ts User posts: '+this.user_posts);
+    this.requests = this.invitesService.getInvites(this.user, statuses.pending);
+    // console.log('user.ts User requests: '+this.requests);
+    this.allRequests = this.invitesService.getInvites(this.user, -1);
+    // console.log('user.ts User allrequests: '+this.allRequests);
 
-    // getting user from previously reded id
-    let check:User = this.userService.getUserByIndexFromList(Number(whichStudent));
-    console.log("user.ts Show-User user data: "+Object.values(check));
-    if(check!=undefined){
-      this.user = check;
-      let logUser = this.auth.getLoggedUser();
+    // this.user_friends = this.user.FriendsList;
+    console.log('user.ts User friends: '+this.user_friends);
+    
+    let logUser = this.auth.getLoggedUser();
 
-      // logs for testing
-      console.log('user.ts User posts: '+this.user_posts);
-      console.log('user.ts User Friends: '+this.user.FriendsList);
-      
-      // if user is logged in changing yourProfile accordingly
-      if(this.user.Surname === logUser.Surname){
-        this.yourProfile = true;
-      }else{this.yourProfile = false;}
+    
+    // if user is logged in changing yourProfile accordingly
+    if(this.user.Surname === logUser.Surname){
+      this.yourProfile = true;
+    }else{this.yourProfile = false;}
 
-    }else{
-      console.log('user.ts There is no user with this index in UserService UserList');
-    }
+    
     // for no undefined friends_list
     if(this.user.FriendsList === undefined){
       this.user_friends = [];
     }else{
-      this.user_friends = this.user.FriendsList;
+      // this.user_friends = this.user.FriendsList;
     }
   }
+  ngOnInit(): void {
+    console.log("user.ts OnInit");
+    
+  }
+
+
+
 
   // Button for Sending Invite to User or removing user from Friends
   // checking which form of button to show
@@ -82,6 +91,8 @@ export class UserComponent implements OnInit{
     let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
     console.log('user.ts sendInvite: '+i);
+    alert("Wysłano zaproszenie")
+    
   }
   removeFriend():void{
     this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
@@ -109,21 +120,27 @@ export class UserComponent implements OnInit{
   // accepting request
   acceptInvite(i:Invitation):void{
     let logUser = this.auth.getLoggedUser()
-    logUser.addFriend(this.user);
-    this.user.addFriend(this.auth.getLoggedUser());
+    let user_from = this.userService.getUserByUsername(i.from.username);
+    // add each other to friends
+    console.log(`user from: ${user_from} user to: ${this.user}`);
+    user_from.addFriend(this.user);
+    this.user.addFriend(user_from);
+    // update users in service and on server
     this.userService.updateUser(this.user);
-    this.userService.updateUser(logUser);
+    this.userService.updateUser(user_from);
+    // change status of invite
     this.invitesService.changeStatus(i, statuses.accepted);
+    // remove invite from requests shown for current user
+    this.requests.splice(this.requests.indexOf(i),1);
   }
   //declining request
+  declineInvite(i:Invitation):void{
+    this.invitesService.changeStatus(i, statuses.rejected);
+    this.requests.splice(this.requests.indexOf(i),1);
+  }
 
-  // checking 
 
-
-
-  // --- user info ---
-
-  getUserFriends():User[]{
+  getUserFriends():string[]{
     let tmp = this.user.FriendsList;
     if(tmp === undefined){
       return []
@@ -132,7 +149,7 @@ export class UserComponent implements OnInit{
     }
   }
 
-  //
+  
   
 
 }

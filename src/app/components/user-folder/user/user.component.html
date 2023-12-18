@@ -8,7 +8,10 @@
   </span>
 
   <p>Tablica użytkownika</p>
-  <app-posts [posts]="user_posts"></app-posts>
+  <app-posts 
+    [posts]="user_posts"
+    [your_profile]="true"
+  ></app-posts>
 
   <div *ngIf="!yourProfile">
     <p>Przycisk akcji Znajomych</p>
@@ -22,19 +25,21 @@
 
   <div *ngIf="yourProfile">
     <p>Znajomi:</p>
-    <!-- <app-users [users]="user.FriendsList"></app-users> -->
+    <ul *ngFor="let user of this.user.FriendsList">
+      <li>{{user}}</li>
+    </ul>
   </div>
 
   <div *ngIf="yourProfile">
     <p>Lista zaproszeń</p>
-    <ul *ngFor="let request of getRequests()">
+    <ul *ngFor="let request of this.requests">
       <li>
         Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
         <button (click)="acceptInvite(request)">
-
+          Akceptuj
         </button>
-        <button>
-          
+        <button (click)="declineInvite(request)">
+          Odrzuć
         </button>
       </li>
     </ul>
@@ -42,7 +47,7 @@
 
   <div *ngIf="yourProfile">
     <p>Cała Lista zaproszeń</p>
-    <ul *ngFor="let request of getAllInvitesToUser()">
+    <ul *ngFor="let request of this.allRequests">
       <li>
         Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
         

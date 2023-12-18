@@ -60,4 +60,6 @@ dwukierunkowa komunikacja pomiędzy komponentami (czy jest w każdym spodziewany
 # uuid chyba trzeba sam nie wiem 'sak'
 unique user id for JSON server
 npm install uuid
-
+# for toasts
+npm install ngx-toastr --save
+npm install @angular/animations --save

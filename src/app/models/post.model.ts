@@ -11,7 +11,7 @@ export class Post {
     private publishDate: Date = new Date();
 
 
-    
+
     public constructor(id:number ,username:string, content:string){
         this.id = id;
         this.username = username;
@@ -41,6 +41,22 @@ export class Post {
       return this.comments;
     }
 
+    public get Likes(): number{
+      return this.likes;
+    }
+
+    public get Dislikes():number{
+      return this.dislikes;
+    }
+
+    public get CommentsCount():number{
+      return this.comments_count;
+    }
+
+    public get PublishDate():Date{
+      return this.publishDate;
+    }
+
     //setters
 
     public set Username(v : string) {
@@ -61,6 +77,10 @@ export class Post {
 
     addComment(comment:Comment){
         this.comments.push(comment);
+    }
+
+    removeComment(ind:number){
+        this.comments.splice(ind,1);
     }
 }
 

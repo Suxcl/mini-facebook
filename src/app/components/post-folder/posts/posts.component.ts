@@ -15,6 +15,7 @@ import { CommentsComponent } from '../comments/comments.component';
 })
 export class PostsComponent{
   @Input() posts!:Post[];
+  @Input() your_profile!:boolean;
 
   constructor
   (

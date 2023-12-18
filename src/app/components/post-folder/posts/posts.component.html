@@ -2,6 +2,7 @@
     <li class="post" *ngFor="let post of posts;">
         <app-post
         [post]="post"
+        [your_profile]="this.your_profile"
         ></app-post>
     </li>
 </ol>

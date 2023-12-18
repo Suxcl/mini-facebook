@@ -6,7 +6,7 @@ export class User{
     private password!: string;
     private email!:string;
     private phoneNumber!: number;
-    private friendsList:User[];
+    private friendsList:string[];
     
     
     constructor(id:number,username:string, name:string, surname:string, password:string, email:string, phoneNumber:number){
@@ -62,7 +62,6 @@ export class User{
         this.email = email;
     }
 
-
     get PhoneNumber():number{
         return this.phoneNumber;
     }
@@ -70,14 +69,14 @@ export class User{
         this.phoneNumber=phonenumber;
     }
 
-    get FriendsList():User[]{
+    get FriendsList():string[]{
         return this.friendsList;
     }
-    getFriend(ind:number):User{
-        return this.friendsList[ind];
-    }
     addFriend(ktos:User){
-        this.friendsList.push(ktos);
+        this.friendsList.push(ktos.username);
+    }
+    removeFriend(ktos:User){
+        this.friendsList.splice(this.friendsList.indexOf(ktos.username), 1);        
     }
     haveFriend(u:User):boolean{
         let tmp = this.friendsList;
@@ -86,11 +85,14 @@ export class User{
         }else{
             let a = false
             tmp.forEach(element => {
-                if(element == u){
+                if(element == u.username){
                     a = true
                 }
             });
             return a
         }
+    }
+    toString():string{
+        return `${this.id}|${this.username}|${this.name}|${this.surname}|${this.password}|${this.email}|${this.phoneNumber}|${this.friendsList}`;
     }
 }
