@@ -1,10 +1,14 @@
 <div id="post_display">
-    <ul>
-        <li>
-            user: {{post.Username}}
-        </li>
-        <li>
-            {{post.Content}}
-        </li>
-    </ul>
+
+  <div class="top-post">
+    <div class="user">user: {{post.Username}}</div>
+    <div class="postDate">{{post.PublishDate}}</div>
+  </div>
+
+  <div class="content">{{post.Content}}</div><br>
+  <div class="post_data">
+    <img src="assets/img/like.svg" alt="likes:"> <div id="likes">{{post.Likes}}</div>
+    <img src="assets/img/dislike.svg" alt="dislikes:"><div id="dislikes">{{post.Dislikes}}</div>
+    <img src="assets/img/comment.svg" alt="comments:"><div id="comments">{{post.CommentsCount}}</div>
+  </div>
 </div>

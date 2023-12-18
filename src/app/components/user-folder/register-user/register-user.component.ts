@@ -75,7 +75,6 @@ export class RegisterUserComponent implements OnInit {
       });
   }
 
-
   AddUser(){
     console.log("register.ts" + this.f);
     let newUser = new User(
