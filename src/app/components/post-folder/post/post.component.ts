@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
+import { PostService } from '../../../services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -11,11 +12,22 @@ import { Post } from '../../../models/post.model';
 })
 export class PostComponent {
   @Input() post!:Post
+  @Input() your_profile!:boolean
 
-  constructor(){
+  constructor
+  (
+    private postService:PostService,
+  ){
 
   }
   ngOnInit(){
 
+  }
+  editPost(){
+
+  }
+
+  deletePost(){
+    this.pos
   }
 }

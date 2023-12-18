@@ -13,6 +13,7 @@ import { PostComponent } from "../post/post.component";
 })
 export class PostsComponent{
   @Input() posts!:Post[];
+  @Input() your_profile!:boolean;
 
   constructor
   (

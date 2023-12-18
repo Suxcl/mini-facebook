@@ -72,12 +72,10 @@ export class UserService {
   }
   // === FRIENDS ===
   removeFriend(u:User, u2:User):void{
-    for(let el of this.Users){
-      if(el.Surname==u.Surname){
-        el.FriendsList.splice(el.FriendsList.indexOf(u2.username), 1);
-      }
-    }
+    u.removeFriend(u2);
+    u2.removeFriend(u);
     this.housingService.putData('Users',u)
+    this.housingService.putData('Users',u2)
     this.refreshUsers$.emit();
   }
 

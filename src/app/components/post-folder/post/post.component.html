@@ -11,4 +11,10 @@
     <img src="assets/img/dislike.svg" alt="dislikes:"><div id="dislikes">{{post.Dislikes}}</div>
     <img src="assets/img/comment.svg" alt="comments:"><div id="comments">{{post.CommentsCount}}</div>
   </div>
+
+  <span *ngIf="this.your_profile">
+    <button  (click)="editPost()">Edytuj</button>
+    <button  (click)="deletePost()">Usuń</button>
+  </span>
+  
 </div>

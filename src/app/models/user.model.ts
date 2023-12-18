@@ -75,6 +75,9 @@ export class User{
     addFriend(ktos:User){
         this.friendsList.push(ktos.username);
     }
+    removeFriend(ktos:User){
+        this.friendsList.splice(this.friendsList.indexOf(ktos.username), 1);        
+    }
     haveFriend(u:User):boolean{
         let tmp = this.friendsList;
         if(tmp === undefined){

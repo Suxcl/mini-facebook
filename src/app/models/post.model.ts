@@ -78,5 +78,9 @@ export class Post {
     addComment(comment:Comment){
         this.comments.push(comment);
     }
+
+    removeComment(ind:number){
+        this.comments.splice(ind,1);
+    }
 }
 

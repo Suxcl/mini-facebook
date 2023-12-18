@@ -8,7 +8,10 @@
   </span>
 
   <p>Tablica użytkownika</p>
-  <app-posts [posts]="user_posts"></app-posts>
+  <app-posts 
+    [posts]="user_posts"
+    [your_profile]="true"
+  ></app-posts>
 
   <div *ngIf="!yourProfile">
     <p>Przycisk akcji Znajomych</p>

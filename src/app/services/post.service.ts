@@ -30,6 +30,10 @@ export class PostService implements OnInit{
     this.housingService.postData('Posts',newpost);
     this.Posts.push(newpost)
   }
+  removePost(post:Post):void{
+    this.Posts.splice(this.Posts.indexOf(post),1);
+    this.housingService.deleteData('Posts',post.Id);
+  }
   getPosts():Post[]{
     return this.Posts;
   };
