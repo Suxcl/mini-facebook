@@ -15,17 +15,25 @@ export class InvitesService{
 
   constructor(
     private housingService:HousingService,
-  ) {
+  ) 
+  {
     console.log("user.service constructor");
-    this.updateInvites(this.housingService.getData('Invites'));
+    this.update()
     
-   }
+  }
 
+  update():void{
+    this.updateInvites(this.housingService.getData('Invites'));
+  }
+  updateInvites(invites:Invitation[]){
+    this.Invites = invites;
+    this.InvitesSubject.next(this.Invites);
+  } 
   addInvite(i:Invitation):void{
     if(!(this.Invites.filter((Invite)=>Invite.from === i.from && Invite.to === i.to).length == 0)){
       this.Invites.push(i);
-      this.housingService.postData('Invites',i);
-      
+      this.housingService.postData('Invites',i); 
+      this.update()
     }
     
   }
@@ -35,50 +43,21 @@ export class InvitesService{
         element.status = status_to;
       }
     });
+    this.housingService.putData('Invites',i);
+    this.update()
   }
 
-  getInvitesFromUser(u:User, status:number = 0):Invitation[]{
+  getInvites(u:User, nr:number){
     let tmpList:Invitation[] = []
-
-    this.Invites.forEach(element => {
-      if(element.from.Surname === u.Surname){
-        tmpList.push(element);
-      }
-    });
-    return tmpList;
-  }
-  getInvitesToUser(u:User):Invitation[]{
-    let tmpList:Invitation[] = []
-    this.Invites.forEach(element => {
-      if(element.to.Surname === u.Surname){
-        tmpList.push(element);
-      }
-    });
-    return tmpList;
-  }
-
-  getInvites(u:User, nr:number=0){
-    let tmpList:Invitation[] = []
-    if (nr === 0){
-      this.Invites.forEach(element => {
-        if(element.to.Surname === u.Surname){
-          tmpList.push(element);
-        }
-      });
-    }else{
       this.Invites.forEach(element => {
         if(element.to.Surname === u.Surname && element.status === nr){
           tmpList.push(element);
         }
-      });
-    }
+    });
     // this.updateInvites(tmpList);
     return tmpList;
   }
-  updateInvites(invites:Invitation[]){
-    this.Invites = invites;
-    this.InvitesSubject.next(this.Invites);
-  }
+
   getInvitesAsObservable():Observable<any>{
     return this.InvitesSubject.asObservable();
   }

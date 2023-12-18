@@ -10,7 +10,7 @@ import { UserService } from '../../../services/user.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { PostService } from '../../../services/post.service';
 import { InvitesService } from '../../../services/invites.service';
-import { Invitation } from '../../../models/invitation.model';
+import { Invitation, statuses } from '../../../models/invitation.model';
 import { PostsComponent } from '../../post-folder/posts/posts.component';
 
 import { CommonModule } from '@angular/common';
@@ -40,9 +40,9 @@ export class UserComponent implements OnInit{
     
   ){
     console.log("user.ts constructor");
-    this.invitesService.getInvitesAsObservable().subscribe((updatedInv) => {
-      this.requests = updatedInv;
-    });
+    // this.invitesService.getInvitesAsObservable().subscribe((updatedInv) => {
+    //   this.requests = updatedInv;
+    // });
   
     
   }
@@ -77,15 +77,20 @@ export class UserComponent implements OnInit{
       this.user_friends = this.user.FriendsList;
     }
   }
-  addFriend():void{
+  inviteUser():void{
     let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
+  }
+  addFriend(i:Invitation):void{
+    this.user.addFriend(i.from);
+    // this.userService.updateUser()
+    this.invitesService.changeStatus(i, statuses.accepted);
   }
   removeFriend():void{
     this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
   }
   getRequests():Invitation[]{
-    let t = this.invitesService.getInvites(this.user);
+    let t = this.invitesService.getInvites(this.user, statuses.pending);
     if(t===undefined){
       return []
     }

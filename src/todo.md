@@ -1,7 +1,8 @@
 # do zrobienia z 
 
+
+## pozostały komentarze
 - komentarze
-- Validacja formularzy - cez zad
 - getpostdedlput na wszystko z bazki
 - połączenie housing i servisów do każdej wartości
 - 
@@ -25,14 +26,14 @@ dane pochodzące z jednej klasy usługi - 1pkt - też nie rozumiem
  --- te popierdolone o co chodzi
 dodatkowy serwis (a)synchroniczny - 1pkt
 własna dyrektywa - 1pkt
-wykorzystanie dowolnego filtru standardowego w szablonie  - 1pkt
-implementacja własnego filtru - 2pkt
+
+
 
 # Z CEZA cos 'może' do zmiany
 
 # jakieś tam ścieżki są jest problem z odświeżaniem, po f5 traci ścieżkę wrzuca na path: ''
 routing (ścieżki 'routes', w tym jedna z parametrem, operacje na obiekcie ActivateRoute i Route) - 1pkt
-
+implementacja własnego filtru - 2pkt
 
 # donzo Z CEZA 
 
@@ -48,9 +49,11 @@ operacje modyfikacji danych za pomocą 4 rodzajów żądań http - 1pkt # trzeba
 dwukierunkowa komunikacja pomiędzy komponentami (czy jest w każdym spodziewanym przypadku) - 2pkt, - może nie jest wszędzie ale jest
 
 
+
+
 # donzo 
-
-
+- Validacja formularzy - cez zad
+- wykorzystanie dowolnego filtru standardowego w szablonie  - 1pkt
 
 ## Co zainstalować 
 

@@ -77,7 +77,7 @@ export class UserService {
     delete this.Users[id];
     this.refreshUsers$.emit();
   }
-
+  // === FRIENDS ===
   removeFriend(u:User, u2:User):void{
     for(let el of this.Users){
       if(el.Surname==u.Surname){

@@ -1,40 +1,37 @@
 <div class="user-profile">
-    <p>user works!</p>
-    <p>{{ user.Username }}</p>
-    <p>{{ user.Name }} {{ user.Surname }}</p>
-  
-    <span *ngIf="yourProfile">
-      <p>Witaj na swoim Profilu!</p>
+  <p>user works!</p>
+  <p>{{ user.Username }}</p>
+  <p>{{ user.Name }} {{ user.Surname }}</p>
+
+  <span *ngIf="yourProfile">
+    <p>Witaj na swoim Profilu!</p>
+  </span>
+
+  <p>Tablica użytkownika</p>
+  <app-posts [posts]="user_posts"></app-posts>
+
+  <div *ngIf="!yourProfile">
+    <p>Przycisk akcji Znajomych</p>
+    <span *ngIf="isFriend">
+      <button (click)="addFriend()">Dodaj znajomego</button>
     </span>
-  
-    <p>Tablica użytkownika</p>
-    <app-posts [posts]="user_posts"></app-posts>
-  
-    <div *ngIf="!yourProfile">
-      <p>Przycisk akcji Znajomych</p>
-      <span *ngIf="isFriend">
-        <button (click)="addFriend()">Dodaj znajomego</button>
-      </span>
-      <span *ngIf="!isFriend">
-        <button (click)="removeFriend()">Usun znajomego</button>
-      </span>
-    </div>
-  
-    <div *ngIf="yourProfile">
-      <p>Znajomi:</p>
-      <!-- <app-users [users]="user.FriendsList"></app-users> -->
-    </div>
-  
-    <div *ngIf="yourProfile">
-      <p>Lista zaproszeń</p>
-      <ul *ngFor="let request of requests">
-        <li>
-          Id {{ request.Id }}
-          Status {{ request.status }}
-          {{ request.from.username }} {{ request.to.username }}
-        </li>
-      </ul>
-    </div>
-  
-  
+    <span *ngIf="!isFriend">
+      <button (click)="removeFriend()">Usun znajomego</button>
+    </span>
+  </div>
+
+  <div *ngIf="yourProfile">
+    <p>Znajomi:</p>
+    <!-- <app-users [users]="user.FriendsList"></app-users> -->
+  </div>
+
+  <div *ngIf="yourProfile">
+    <p>Lista zaproszeń</p>
+    <ul *ngFor="let request of requests">
+      <li>
+        Id {{ request.Id }}
+        Status {{ request.status }}
+        {{ request.from.username }} {{ request.to.username }}
+      </li>
+    </ul>
   </div>
