@@ -5,18 +5,11 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <!-- <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li> -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li> -->
-            
+        <ul class="navbar-nav mr-auto">            
             <!-- When someone is logged -->
             <li>
                 <span *ngIf="isLogged">
-                    <a class="nav-link" [routerLink]="['/show-user', this.user_id]" routerLinkActive="active" >Profil {{userName}}</a>      
+                    <a class="nav-link" [routerLink]="['/show-user', this.loggedUser.Id]" routerLinkActive="active" >Profil {{this.loggedUser.username}}</a>      
                 </span>
             </li>
             <li>
@@ -41,7 +34,3 @@
         </ul>
     </div>
 </nav>
-
-
-<!-- The routed views render in the <router-outlet>-->
-<!-- <router-outlet></router-outlet> -->

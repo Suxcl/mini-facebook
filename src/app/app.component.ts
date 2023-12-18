@@ -17,7 +17,7 @@ import { AuthenticationService} from './services/authentication.service';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,7 +28,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     RouterLinkActive, 
     BlogComponent, 
     NavbarComponent, 
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

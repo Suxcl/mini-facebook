@@ -25,7 +25,7 @@ dane pochodzące z jednej klasy usługi - 1pkt - też nie rozumiem
 
  --- te popierdolone o co chodzi
 dodatkowy serwis (a)synchroniczny - 1pkt
-własna dyrektywa - 1pkt
+
 
 
 
@@ -48,7 +48,7 @@ wykorzystanie formularzy, min. 5 elementów (czy właściwie wybrano dane do wpr
 operacje modyfikacji danych za pomocą 4 rodzajów żądań http - 1pkt # trzeba sprawdzic czu PUT DELETE działa bo GET I SPOT Śmigga
 dwukierunkowa komunikacja pomiędzy komponentami (czy jest w każdym spodziewanym przypadku) - 2pkt, - może nie jest wszędzie ale jest
 
-
+własna dyrektywa - 1pkt
 
 
 # donzo 
