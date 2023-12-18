@@ -1,4 +1,84 @@
-main{
-  border-left: 5px solid lightgray;
-  border-right: 5px solid lightgray;
+
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+}
+
+
+.container-fuild {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-3 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.app-users {
+  list-style: none;
+  padding: 0;
+}
+
+.app-users li {
+  margin-bottom: 10px;
+}
+
+
+.col-6 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.app-add-post {
+  margin-bottom: 20px;
+}
+
+
+.app-posts {
+  list-style: none;
+  padding: 0;
+}
+
+.app-posts li {
+  margin-bottom: 20px;
+}
+
+
+.col-3 aside {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 768px) {
+  .row {
+      flex-direction: column;
+  }
+
+  .col-3, .col-6, .col-3 aside {
+      width: 100%;
+      margin-bottom: 20px;
+  }
 }

@@ -1,11 +1,21 @@
-ul{
-  list-style-type: none;
+
+#post_display ul {
+  list-style: none;
   padding: 0;
 }
-li{
-  margin: 5px;
+
+
+#post_display li {
+  margin-bottom: 10px;
 }
-li:last-child{
-  border: 1px gray solid;
-  border-radius: 3px;
+
+#post_display li:first-child {
+  font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+  #post_display {
+      width: 100%;
+  }
 }

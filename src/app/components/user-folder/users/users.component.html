@@ -1,5 +1,4 @@
-<p [ngClass] = "'title'">Users List</p>
-
+<p [ngClass] = "'title'"></p>
 <div class="container">
     <div class="inputs">
     <label>Search: </label> <input type="text" [(ngModel)]="searchString" />
@@ -7,5 +6,4 @@
     <div *ngFor="let user of users | searchUsers:searchString; index as i" [routerLink]="['/show-user', i]" class="user-container">
         {{user.Username}}
     </div>
-
 </div>
