@@ -4,13 +4,35 @@
   padding: 0;
 }
 
+#post_display{
+  display: flex;
+  flex-direction:column;
+}
 
-#post_display li {
+#post_display div {
   margin-bottom: 10px;
 }
 
-#post_display li:first-child {
+#post_display div:first-child {
   font-weight: bold;
+}
+
+#post_display .top-post {
+  display: flex;
+}
+
+
+#post_display .post_data {
+  display: flex;
+}
+
+#post_display .post_data div {
+  text-align: center;
+  width: 33%;
+}
+
+#post_display .post_data img {
+  width: 30px;
 }
 
 

@@ -6,7 +6,6 @@ import { User } from '../models/user.model';
 
 export function uniqueUsernameValidator(userService:UserService): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    
     const userList:User[] = userService.getUsers();
     let isValid = false;
     for(let user of userList){
