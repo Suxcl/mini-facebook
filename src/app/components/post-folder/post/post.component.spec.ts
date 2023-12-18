@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostComponent } from './post.component';
+import { CommentsComponent } from '../comments/comments.component';
+import { CommentComponent } from '../comment/comment.component';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -8,7 +10,7 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PostComponent]
+      imports: [PostComponent,CommentsComponent]
     })
     .compileComponents();
     
