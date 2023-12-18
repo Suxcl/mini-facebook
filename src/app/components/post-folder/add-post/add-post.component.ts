@@ -28,7 +28,12 @@ export class AddPostComponent implements OnInit{
   ) {
 
     this.form4addpost = fb.group({
-      content: ['']
+      content: [
+        null,
+        {
+        validators: [Validators.required]
+        }
+      ]
     })
 
   }
