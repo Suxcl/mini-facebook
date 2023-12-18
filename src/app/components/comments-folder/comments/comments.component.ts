@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Comment } from '../../../models/comment.model';
 import { CommentsService } from '../../../services/comments.service';
 import { CommentComponent } from '../comment/comment.component';
-import { PostComponent } from '../post/post.component';
+import { PostComponent } from '../../post-folder/post/post.component';
 
 @Component({
   standalone: true,

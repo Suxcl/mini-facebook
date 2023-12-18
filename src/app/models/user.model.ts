@@ -1,7 +1,7 @@
 export class User{
     private id!: number;
     public username!: string;
-    public name!: string;
+    private name!: string;
     private surname!: string;
     private password!: string;
     private email!:string;

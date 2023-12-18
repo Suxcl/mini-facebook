@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../services/post.service';
 import { PostDateDirective } from '../../../directives/post-date.directive';
-import { CommentComponent } from '../comment/comment.component';
-import { CommentsComponent } from '../comments/comments.component';
+import { CommentComponent } from '../../comments-folder/comment/comment.component';
+import { CommentsComponent } from '../../comments-folder/comments/comments.component';
 
 @Component({
   selector: 'app-post',

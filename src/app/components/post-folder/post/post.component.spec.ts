@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostComponent } from './post.component';
-import { CommentsComponent } from '../comments/comments.component';
+import { CommentsComponent } from '../../comments-folder/comments/comments.component';
 import { CommentComponent } from '../comment/comment.component';
 
 describe('PostComponent', () => {
