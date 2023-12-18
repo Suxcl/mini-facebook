@@ -7,11 +7,12 @@ import { CommentComponent } from '../../comments-folder/comment/comment.componen
 import { CommentsComponent } from '../../comments-folder/comments/comments.component';
 
 @Component({
-  selector: 'app-post',
+  providers: [DatePipe],
   standalone: true,
-  imports: [CommentsComponent,CommentComponent,PostDateDirective],
+  selector: 'app-post',
+  styleUrls: ['./post.component.css'],
+  imports: [CommonModule, PostDateDirective, CommentComponent, CommentsComponent],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.css'
 })
 export class PostComponent {
   @Input() post!:Post

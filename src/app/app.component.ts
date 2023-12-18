@@ -16,7 +16,6 @@ import { PostService } from './services/post.service';
 import { AuthenticationService} from './services/authentication.service';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-root',
