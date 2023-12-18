@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -23,17 +23,30 @@ export class LoginUserComponent implements OnInit{
     private router: Router,
     private userService: UserService,
     private auth:AuthenticationService,
-    private snackBar:MatSnackBar){
+    private snackBar:MatSnackBar,
+    private formBuilder:FormBuilder){
       console.log("login constructor running")
-      this.form4login = new FormGroup({
-        username: new FormControl(),
-        password: new FormControl()
+      this.form4login = formBuilder.group({
+        username:
+        [
+          null,
+          {
+            validators:[Validators.required]
+          }
+        ],
+        password:
+        [
+          null,
+          {
+            validators:[Validators.required]
+          }
+        ]
       });
   }
 
   ngOnInit(): void{
     console.log('Login.ts login user initialised');
-  
+
   }
 
   doLoginUser(){
@@ -49,14 +62,14 @@ export class LoginUserComponent implements OnInit{
 
         // this.openToast("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
         this.auth.login(temp); // zalogowanie usera w service authenticator
-        this.router.navigate(['/'])  
+        this.router.navigate(['/'])
           // przekierowanie gdziekolwiek bo i tak przejdzie na stronę główną
       }else{ // gdy podane są złe dane
         // this.openToast("Błędne dane");
         console.log('Login.ts Login fails');
-      }  
+      }
     }
-    
+
   }
 
 
