@@ -2,7 +2,9 @@
 
   <div class="top-post">
     <div class="user">user: {{post.Username}}</div>
-    <div class="postDate">{{post.PublishDate}}</div>
+    <div class="date" appPostDate [inputDate]="post.PublishDate">
+      {{post.PublishDate | date: 'medium'}}
+    </div>
   </div>
 
   <div class="content">{{post.Content}}</div><br>
@@ -16,5 +18,5 @@
     <button  (click)="editPost()">Edytuj</button>
     <button  (click)="deletePost()">Usuń</button>
   </span>
-  
+
 </div>

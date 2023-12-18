@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../models/post.model';
 import { PostService } from '../../../services/post.service';
+import { PostDateDirective } from '../../../directives/post-date.directive';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,PostDateDirective],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
@@ -28,6 +29,6 @@ export class PostComponent {
   }
 
   deletePost(){
-    this.pos
+    this.postService.removePost(this.post);
   }
 }

@@ -21,6 +21,10 @@
   display: flex;
 }
 
+#post_display .top-post .date {
+  margin-left:auto;
+}
+
 
 #post_display .post_data {
   display: flex;
