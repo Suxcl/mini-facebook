@@ -5,6 +5,7 @@ import { PostService } from '../../../services/post.service';
 import { PostDateDirective } from '../../../directives/post-date.directive';
 import { CommentComponent } from '../../comments-folder/comment/comment.component';
 import { CommentsComponent } from '../../comments-folder/comments/comments.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   providers: [DatePipe],
