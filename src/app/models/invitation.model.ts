@@ -6,10 +6,11 @@ export enum statuses{
     'rejected',
 }
 export class Invitation {
+    public id;
     public from:User;
     public to:User;
     public status:number = statuses.pending;
-    public id;
+    
     constructor(id:number, from:User, to:User){
         this.from = from;
         this.to = to;

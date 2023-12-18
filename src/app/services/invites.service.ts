@@ -20,13 +20,24 @@ export class InvitesService{
     // console.log("user.service constructor");
     this.Invites = this.housingService.getData('Invites');
   }
-
+  compareInvites(i1:Invitation, i2:Invitation):boolean{
+    const keys1 = Object.keys(i1) as (keyof Invitation)[];
+    const keys2 = Object.keys(i2) as (keyof Invitation)[];
+    for(let key of keys1){
+      if(i1[key] !== i2[key]){
+        return false;
+      }
+    }
+    return true
+  }
   addInvite(i:Invitation):void{
-    if(this.Invites.filter((Invite)=> {
-      console.log(Invite.from, i.from, Invite.to, i.to);
-      return Invite.from === i.from && Invite.to === i.to
-    })){
-      
+    let found = false
+    this.Invites.forEach(element => {
+      if(i.from.username === element.from.username && i.to.username === element.to.username){
+        found = true;
+      }
+    })
+    if(found){
       console.log('invites.service there is existing invite: '+i);
     }else{
       this.Invites.push(i);
@@ -45,19 +56,26 @@ export class InvitesService{
   }
 
   getInvites(u:User, nr:number): Invitation[]{
+    
     let tmpList:Invitation[] = []
     this.Invites.forEach(element => {
-      if(element.to.Surname === u.Surname){
+      if(element.to.username === u.username){
         if(nr === -1){
+          console.log('check adding invite: '+element);
           tmpList.push(element);  
         }else if(nr in [statuses.pending, statuses.accepted, statuses.rejected]){
           if(element.status === nr){
+            console.log('check adding invite: '+element + ' ' + nr);
             tmpList.push(element);
           }
         }
       }
     });
+    console.log('invite.service getInvites: '+tmpList);
     return tmpList;
+  }
+  getAllInvites():Invitation[]{
+    return this.Invites
   }
 
 }

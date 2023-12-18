@@ -34,7 +34,7 @@ export class PostService implements OnInit{
     return this.Posts;
   };
 
-  getPostsOfUser(u:User):Post[]{
+  getUserPosts(u:User):Post[]{
     let surname:string = u.Username;
     let tmp:Post[] = [];
     this.Posts.forEach(element => {

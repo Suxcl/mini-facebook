@@ -5,8 +5,10 @@ import { UsersComponent } from '../user-folder/users/users.component';
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
 import { Comment } from '../../models/comment.model';
-
+import { Invitation } from '../../models/invitation.model';
 import { UserService } from '../../services/user.service';
+import { InvitesService } from '../../services/invites.service';
+import { CommentsService } from '../../services/comments.service';
 import { PostsComponent } from "../post-folder/posts/posts.component";
 import { AddPostComponent } from "../post-folder/add-post/add-post.component";
 import { AuthenticationService } from '../../services/authentication.service';
@@ -36,14 +38,17 @@ export class BlogComponent implements OnInit{
 
   users:User[] = [];
   posts:Post[] = [];
+  invites:Invitation[] = [];
+  Comments:Comment[] = [];
   logged!:User;
 
   constructor(
     private userService:UserService,
     private postService:PostService,
-    private housingService:HousingService,
+    private inviteService:InvitesService,
+    private commentService:CommentsService,
     private auth:AuthenticationService,
-    private route:ActivatedRoute,
+    
     ){
       // console.log("blog.ts constructor");
     }
@@ -53,17 +58,11 @@ export class BlogComponent implements OnInit{
     console.log("blog.ts OnInit");
     this.users = this.userService.getUsers();
     this.posts = this.postService.getPosts();
+    this.invites = this.inviteService.getAllInvites();
+    // this.Comments = this.commentService.getComments();
     this.logged = this.auth.getLoggedUser();
   }
 
 
-
-  // Users
-
-  // Posts
-
-  // addPost(newpost:Post){
-  //   this.postService.addPost(newpost);
-  // }
 }
 
