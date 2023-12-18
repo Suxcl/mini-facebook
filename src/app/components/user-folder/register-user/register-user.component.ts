@@ -43,9 +43,8 @@ export class RegisterUserComponent implements OnInit {
         password: [
           null,
           {
-            validators: [Validators.required]
+            validators: [Validators.required,Validators.minLength(8)]
           }
-          //   Validators.minLength(8),
           //   // custom validator for password strenght
         ],
         name: [
@@ -76,6 +75,7 @@ export class RegisterUserComponent implements OnInit {
       });
   }
 
+
   AddUser(){
     console.log("register.ts" + this.f);
     let newUser = new User(
@@ -96,11 +96,13 @@ export class RegisterUserComponent implements OnInit {
 
   };
 
+
   usernameValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       return this.checkIfUsernameExists(control.value).pipe(
         map(res => {
           // if res is true, username exists, return true
+          console.log(res);
           return res ? { usernameExists: true } : null;
           // NB: Return null if there is no error
         })

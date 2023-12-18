@@ -16,10 +16,10 @@ export class UserService {
 
   constructor(
     private housingService: HousingService,
-    
+
   ) {
     console.log("user.service constructor reading users from db");
-    let data:User[] = this.housingService.getUsers();    
+    let data:User[] = this.housingService.getUsers();
     this.updateUsers(data);
   }
 
@@ -45,23 +45,23 @@ export class UserService {
     return this.Users[nr];
   }
 
-  getUserByUsername(username:string):User{
+  getUserByUsername(username:string):User | null{
     for(let user of this.Users){
       if (user.Username==username) {
         return user;
       }
     }
-    return {} as User;
+    return null;
   }
   getUserIndex(user:User):number{
     return this.Users.indexOf(user);
   }
   isUsernameTaken(username:string){
-    if (this.getUserByUsername(username) != {} as User) {
-      console.log(username+":"+ (this.getUserByUsername(username) != {} as User))
-      return false
+    if (this.getUserByUsername(username) != null) {
+      console.log(username+":"+ (this.getUserByUsername(username) != {} as User));
+      return true
     }
-    return true
+    return false
   }
 
   addUser(user: User):void{

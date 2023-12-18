@@ -4,16 +4,47 @@
         <div class="content">
           <label for="username">Username: </label><br>
           <input type="text" formControlName="username" placeholder="nazwa użytkownika"><br>
+          <div *ngIf="f.get('username')?.invalid && (f.get('username')?.touched || f.get('username')?.dirty)" class="alert">
+            <div *ngIf="f.get('username')?.errors?.['required']">Name is required.</div>
+            <div *ngIf="f.get('username')?.errors?.['minlength']">Name must be at least 5 characters long.</div>
+            <div *ngIf="f.get('username')?.errors?.['maxlength']">Name must be shorter than 50 characters.</div>
+            <div *ngIf="f.get('username')?.errors?.['usernameExists']">Name already exists.</div>
+          </div>
+
           <label for="password">Password: </label><br>
           <input type="text" formControlName="password" placeholder="hasło"><br>
+          <div *ngIf="f.get('password')?.invalid && (f.get('password')?.touched || f.get('password')?.dirty)" class="alert">
+            <div *ngIf="f.get('password')?.errors?.['required']">Password is required.</div>
+            <div *ngIf="f.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>
+          </div>
+
           <label for="name">Name: </label><br>
           <input type="text" formControlName="name" placeholder="imie" maxlength="50"><br>
+          <div *ngIf="f.get('name')?.invalid && (f.get('name')?.touched || f.get('name')?.dirty)" class="alert">
+            <div *ngIf="f.get('name')?.errors?.['required']">name is required.</div>
+            <div *ngIf="f.get('name')?.errors?.['maxlength']">name must be shorter than 50 characters.</div>
+          </div>
+
           <label for="surname">Surname: </label><br>
           <input type="text" formControlName="surname" placeholder="nazwisko"><br>
+          <div *ngIf="f.get('surname')?.invalid && (f.get('surname')?.touched || f.get('surname')?.dirty)" class="alert">
+            <div *ngIf="f.get('surname')?.errors?.['required']">surname is required.</div>
+            <div *ngIf="f.get('surname')?.errors?.['maxlength']">surname must be shorter than 50 characters.</div>
+          </div>
+
           <label for="email">Email: </label><br>
           <input type="text" formControlName="email" placeholder="email"><br>
+          <div *ngIf="f.get('email')?.invalid && (f.get('email')?.touched || f.get('email')?.dirty)" class="alert">
+            <div *ngIf="f.get('email')?.errors?.['required']">email is required.</div>
+            <div *ngIf="f.get('email')?.errors?.['email']">email must be valid.</div>
+          </div>
+
           <label for="phoneNumber">Phone Number: </label><br>
-          <input type="text" formControlName="phoneNumber" placeholder="numer telefonu"><br><br>
+          <input type="text" formControlName="phoneNumber" placeholder="numer telefonu"><br>
+          <div *ngIf="f.get('phoneNumber')?.invalid && (f.get('phoneNumber')?.touched || f.get('phoneNumber')?.dirty)" class="alert">
+            <div *ngIf="f.get('phoneNumber')?.errors?.['required']">surname is required.</div>
+          </div>
+
         </div>
         <div class="actions">
           <input [disabled]="f.invalid" type="submit" value="Zarejestruj się">

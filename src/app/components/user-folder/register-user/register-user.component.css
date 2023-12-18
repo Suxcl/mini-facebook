@@ -12,6 +12,12 @@
 
 }
 
+.container .content .alert{
+  color: red;
+  margin: 0px;
+  padding: 3px 20px 3px 20px;
+}
+
 .container .actions{
   margin-top: 10px;
   text-align: center;
