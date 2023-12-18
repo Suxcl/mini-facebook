@@ -18,7 +18,7 @@ import { User } from '../../../models/user.model';
 export class AddPostComponent implements OnInit{
   form4addpost:FormGroup;
   user!:User;
-  @Output() addPostInParent =  new EventEmitter<{newPost:Post}>();
+  // @Output() addPostInParent =  new EventEmitter<{newPost:Post}>();
 
   constructor(
     private router: Router,
@@ -42,15 +42,10 @@ export class AddPostComponent implements OnInit{
     console.log('addPost form', this.form4addpost);
     if (this.authenticationService.isSomeoneLoggedIn()) {
       let user = this.authenticationService.getLoggedUser();
-      this.user = this.authenticationService.getLoggedUser();
-
-      // console.log("add-post.ts user " + Object.keys(user) , Object.values(user));
-      // console.log('add-post.ts user username' + user.Username);
-
-      console.log("add-post.ts user " + Object.keys(this.user) , Object.values(user));
-      console.log('add-post.ts user username ' + this.user.Username);
       let p:Post  = new Post(this.postService.getUniqueId(),user.Username, this.form4addpost.value.content);
-      this.addPostInParent.emit({newPost: p});
+      console.log("add-post.ts newPost: ", p);
+      this.postService.addPost(p);
+      
     }else{
       console.log('add post no user ERR');
     }

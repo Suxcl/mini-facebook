@@ -39,12 +39,7 @@ export class UserComponent implements OnInit{
     private invitesService:InvitesService,
     
   ){
-    console.log("user.ts constructor");
-    // this.invitesService.getInvitesAsObservable().subscribe((updatedInv) => {
-    //   this.requests = updatedInv;
-    // });
-  
-    
+    console.log("user.ts constructor");    
   }
   ngOnInit(): void {
     console.log("user.ts OnInit");
@@ -77,18 +72,24 @@ export class UserComponent implements OnInit{
       this.user_friends = this.user.FriendsList;
     }
   }
-  inviteUser():void{
+
+  // Button for Sending Invite to User or removing user from Friends
+  // checking which form of button to show
+  isLoggedUserFriendWithCurrentUser():boolean{
+    return this.user.haveFriend(this.auth.getLoggedUser());
+  }
+  sendInvite():void{
     let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
-  }
-  addFriend(i:Invitation):void{
-    this.user.addFriend(i.from);
-    // this.userService.updateUser()
-    this.invitesService.changeStatus(i, statuses.accepted);
+    console.log('user.ts sendInvite: '+i);
   }
   removeFriend():void{
     this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
   }
+
+
+  // --- Invites ---
+  //all pending invites
   getRequests():Invitation[]{
     let t = this.invitesService.getInvites(this.user, statuses.pending);
     if(t===undefined){
@@ -96,6 +97,32 @@ export class UserComponent implements OnInit{
     }
     return t;
   }
+  // testing purpose all invites
+  getAllInvitesToUser():Invitation[]{
+    let t = this.invitesService.getInvites(this.user,-1);
+    if(t===undefined){
+      return []
+    }
+    return t;
+
+  }
+  // accepting request
+  acceptInvite(i:Invitation):void{
+    let logUser = this.auth.getLoggedUser()
+    logUser.addFriend(this.user);
+    this.user.addFriend(this.auth.getLoggedUser());
+    this.userService.updateUser(this.user);
+    this.userService.updateUser(logUser);
+    this.invitesService.changeStatus(i, statuses.accepted);
+  }
+  //declining request
+
+  // checking 
+
+
+
+  // --- user info ---
+
   getUserFriends():User[]{
     let tmp = this.user.FriendsList;
     if(tmp === undefined){
@@ -104,18 +131,9 @@ export class UserComponent implements OnInit{
       return tmp;
     }
   }
-  isFriend():boolean{
-    let tmp = this.auth.getLoggedUser().FriendsList;
-    if(tmp === undefined){
-      return false
-    }else{
-      if(tmp.includes(this.user)){
-        return true
-      }else{
-        return false
-      }
-    }
-  }
+
+  //
+  
 
 }
 

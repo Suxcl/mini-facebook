@@ -12,10 +12,10 @@
 
   <div *ngIf="!yourProfile">
     <p>Przycisk akcji Znajomych</p>
-    <span *ngIf="isFriend">
-      <button (click)="addFriend()">Dodaj znajomego</button>
+    <span *ngIf="!isLoggedUserFriendWithCurrentUser()">
+      <button (click)="sendInvite()">Dodaj znajomego</button>
     </span>
-    <span *ngIf="!isFriend">
+    <span *ngIf="isLoggedUserFriendWithCurrentUser()">
       <button (click)="removeFriend()">Usun znajomego</button>
     </span>
   </div>
@@ -27,11 +27,26 @@
 
   <div *ngIf="yourProfile">
     <p>Lista zaproszeń</p>
-    <ul *ngFor="let request of requests">
+    <ul *ngFor="let request of getRequests()">
       <li>
-        Id {{ request.Id }}
-        Status {{ request.status }}
-        {{ request.from.username }} {{ request.to.username }}
+        Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
+        <button (click)="acceptInvite(request)">
+
+        </button>
+        <button>
+          
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="yourProfile">
+    <p>Cała Lista zaproszeń</p>
+    <ul *ngFor="let request of getAllInvitesToUser()">
+      <li>
+        Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
+        
+        
       </li>
     </ul>
   </div>

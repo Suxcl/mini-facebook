@@ -11,31 +11,28 @@ export class InvitesService{
   public refreshInvites$: EventEmitter<void> = new EventEmitter<void>();
 
   Invites:Invitation[] = []
-  InvitesSubject = new BehaviorSubject<Invitation[]>([]);
+
 
   constructor(
     private housingService:HousingService,
   ) 
   {
-    console.log("user.service constructor");
-    this.update()
-    
+    // console.log("user.service constructor");
+    this.Invites = this.housingService.getData('Invites');
   }
 
-  update():void{
-    this.updateInvites(this.housingService.getData('Invites'));
-  }
-  updateInvites(invites:Invitation[]){
-    this.Invites = invites;
-    this.InvitesSubject.next(this.Invites);
-  } 
   addInvite(i:Invitation):void{
-    if(!(this.Invites.filter((Invite)=>Invite.from === i.from && Invite.to === i.to).length == 0)){
+    if(this.Invites.filter((Invite)=> {
+      console.log(Invite.from, i.from, Invite.to, i.to);
+      return Invite.from === i.from && Invite.to === i.to
+    })){
+      
+      console.log('invites.service there is existing invite: '+i);
+    }else{
       this.Invites.push(i);
       this.housingService.postData('Invites',i); 
-      this.update()
+      console.log('invites.service catched sendInvite from user.ts there is no existing invite: '+i);
     }
-    
   }
   changeStatus(i:Invitation, status_to:number):void{
     this.Invites.forEach(element => {
@@ -43,22 +40,24 @@ export class InvitesService{
         element.status = status_to;
       }
     });
+    this.Invites[this.Invites.indexOf(i)].status = status_to;
     this.housingService.putData('Invites',i);
-    this.update()
   }
 
-  getInvites(u:User, nr:number){
+  getInvites(u:User, nr:number): Invitation[]{
     let tmpList:Invitation[] = []
-      this.Invites.forEach(element => {
-        if(element.to.Surname === u.Surname && element.status === nr){
-          tmpList.push(element);
+    this.Invites.forEach(element => {
+      if(element.to.Surname === u.Surname){
+        if(nr === -1){
+          tmpList.push(element);  
+        }else if(nr in [statuses.pending, statuses.accepted, statuses.rejected]){
+          if(element.status === nr){
+            tmpList.push(element);
+          }
         }
+      }
     });
-    // this.updateInvites(tmpList);
     return tmpList;
   }
 
-  getInvitesAsObservable():Observable<any>{
-    return this.InvitesSubject.asObservable();
-  }
 }

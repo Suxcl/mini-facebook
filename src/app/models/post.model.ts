@@ -8,6 +8,7 @@ export class Post {
     private likes:number = 0;
     private dislikes:number = 0;
     private img: string[] = [];
+    private publishDate: Date = new Date();
 
 
     

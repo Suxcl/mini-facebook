@@ -53,7 +53,9 @@ export class UserService {
     }
     return {} as User;
   }
-
+  getUserIndex(user:User):number{
+    return this.Users.indexOf(user);
+  }
   isUsernameTaken(username:string){
     if (this.getUserByUsername(username) != {} as User) {
       console.log(username+":"+ (this.getUserByUsername(username) != {} as User))
@@ -69,8 +71,9 @@ export class UserService {
     this.refreshUsers$.emit(); // emit event to refresh displays of users
   }
 
-  updateUser(user:User, id:number):void{
-    this.Users[id] = user;
+  updateUser(user:User):void{
+    this.housingService.putUser(user);
+    this.Users[this.getUserIndex(user)] = user;
     this.refreshUsers$.emit();
   }
   removeUser(id:number):void{

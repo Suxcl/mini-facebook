@@ -11,24 +11,15 @@ import { PostComponent } from "../post/post.component";
     styleUrl: './posts.component.css',
     imports: [CommonModule, PostComponent]
 })
-export class PostsComponent implements OnInit{
+export class PostsComponent{
   @Input() posts!:Post[];
 
   constructor
   (
     private postService:PostService
   ) 
-  {
-    this.postService.getPostsAsObservable().subscribe((update) => {
-      console.log("posts.ts update: "+update);
-      this.posts = update;
-    });
-  }
+  {}
 
-  ngOnInit(): void {
-    console.log("posts.ts component On Init");
-
-  }
   
   
 }

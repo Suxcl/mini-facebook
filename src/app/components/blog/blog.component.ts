@@ -45,20 +45,15 @@ export class BlogComponent implements OnInit{
     private auth:AuthenticationService,
     private route:ActivatedRoute,
     ){
-      console.log("blog.ts constructor");
-      this.users = this.userService.getUsers();
-      // this.posts = this.postService.getPosts();
-      this.logged = this.auth.getLoggedUser();
-
-      this.postService.getPostsAsObservable().subscribe((update) => {
-        this.posts = update;
-      });
+      // console.log("blog.ts constructor");
     }
 
 
   ngOnInit(): void {
     console.log("blog.ts OnInit");
-
+    this.users = this.userService.getUsers();
+    this.posts = this.postService.getPosts();
+    this.logged = this.auth.getLoggedUser();
   }
 
 
@@ -67,13 +62,8 @@ export class BlogComponent implements OnInit{
 
   // Posts
 
-  addPost(newpost:Post){
-    this.housingService.postData('Posts',newpost);
-    //this.posts = this.postService.getPosts();
-    // this.posts.push(newpost);
-  }
+  // addPost(newpost:Post){
+  //   this.postService.addPost(newpost);
+  // }
 }
 
-// bootstrapApplication(AppComponent,{
-//   providers: [provideRouter(routes)]
-// })

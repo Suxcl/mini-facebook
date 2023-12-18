@@ -79,4 +79,18 @@ export class User{
     addFriend(ktos:User){
         this.friendsList.push(ktos);
     }
+    haveFriend(u:User):boolean{
+        let tmp = this.friendsList;
+        if(tmp === undefined){
+            return false
+        }else{
+            let a = false
+            tmp.forEach(element => {
+                if(element == u){
+                    a = true
+                }
+            });
+            return a
+        }
+    }
 }

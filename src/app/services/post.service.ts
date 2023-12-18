@@ -1,5 +1,5 @@
 import { HousingService } from './housing.service';
-import { Injectable, EventEmitter} from '@angular/core';
+import { Injectable, EventEmitter, OnInit} from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Post } from '../models/post.model';
 import { User } from '../models/user.model';
@@ -8,32 +8,31 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class PostService implements OnInit{
 
   public refreshPosts$: EventEmitter<void> = new EventEmitter<void>();
   Posts:Post[]=[];
   PostsSubject$ = new BehaviorSubject<Post[]>([]);
 
-  constructor(
+  constructor
+  (
     private housingService: HousingService,
     private httpClient: HttpClient,
-    ) {
-
-    console.log("post.service constructor");
-    this.updatePosts(this.housingService.getData('Posts'));
+  ) 
+  {
+    // console.log("post.service constructor");
+    this.Posts = this.housingService.getData('Posts');
   }
-
+  ngOnInit(): void {
+      
+  }
+  addPost(newpost:Post):void{
+    this.housingService.postData('Posts',newpost);
+    this.Posts.push(newpost)
+  }
   getPosts():Post[]{
     return this.Posts;
   };
-  getPostsAsObservable():Observable<any>{
-    return this.PostsSubject$.asObservable();
-  }
-  updatePosts(posts:Post[]){
-    this.Posts = posts;
-    this.PostsSubject$.next(posts);
-  }
-
 
   getPostsOfUser(u:User):Post[]{
     let surname:string = u.Username;
