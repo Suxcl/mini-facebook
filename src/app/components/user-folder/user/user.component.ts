@@ -15,6 +15,7 @@ import { PostsComponent } from '../../post-folder/posts/posts.component';
 
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 
 @Component({
@@ -32,20 +33,20 @@ export class UserComponent implements OnInit{
   requests:Invitation[] = [];
   allRequests:Invitation[] = [];
 
-  
+
   constructor(
     private userService:UserService,
     private route:ActivatedRoute,
     private auth:AuthenticationService,
     private postService: PostService,
     private invitesService:InvitesService,
-    
+    private snackBar:SnackbarService
   ){
-    console.log("user.ts constructor");    
-    console.log("user.ts constructor", this.postService.getPosts());    
-    console.log("user.ts constructor", this.invitesService.getAllInvites());    
+    console.log("user.ts constructor");
+    console.log("user.ts constructor", this.postService.getPosts());
+    console.log("user.ts constructor", this.invitesService.getAllInvites());
     const whichStudent = this.route.snapshot.paramMap.get('id');
-    
+
     this.user = this.userService.getUserByIndexFromList(Number(whichStudent));
     // console.log('user.ts User : '+this.user);
     this.user_posts = this.postService.getUserPosts(this.user);
@@ -57,16 +58,16 @@ export class UserComponent implements OnInit{
 
     // this.user_friends = this.user.FriendsList;
     console.log('user.ts User friends: '+this.user_friends);
-    
+
     let logUser = this.auth.getLoggedUser();
 
-    
+
     // if user is logged in changing yourProfile accordingly
     if(this.user.Surname === logUser.Surname){
       this.yourProfile = true;
     }else{this.yourProfile = false;}
 
-    
+
     // for no undefined friends_list
     if(this.user.FriendsList === undefined){
       this.user_friends = [];
@@ -76,7 +77,7 @@ export class UserComponent implements OnInit{
   }
   ngOnInit(): void {
     console.log("user.ts OnInit");
-    
+
   }
 
 
@@ -91,8 +92,8 @@ export class UserComponent implements OnInit{
     let i:Invitation = new Invitation(this.invitesService.Invites.length+1, this.auth.getLoggedUser(), this.user);
     this.invitesService.addInvite(i);
     console.log('user.ts sendInvite: '+i);
-    alert("Wysłano zaproszenie")
-    
+    this.snackBar.openSnackBar("Wysłano zaproszenie")
+
   }
   removeFriend():void{
     this.userService.removeFriend(this.auth.getLoggedUser(), this.user);
@@ -149,8 +150,8 @@ export class UserComponent implements OnInit{
     }
   }
 
-  
-  
+
+
 
 }
 

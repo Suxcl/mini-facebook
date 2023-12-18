@@ -7,6 +7,7 @@ import { Post } from '../../../models/post.model';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { PostComponent } from '../post/post.component';
 import { User } from '../../../models/user.model';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-post',
@@ -24,7 +25,8 @@ export class AddPostComponent implements OnInit{
     private router: Router,
     private postService: PostService,
     private authenticationService: AuthenticationService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private snackBar:SnackbarService
   ) {
 
     this.form4addpost = fb.group({
@@ -54,7 +56,7 @@ export class AddPostComponent implements OnInit{
       })
     }else{
       console.log('add post no user ERR');
-      alert("Użytkownik musi być zallogowany");
+      this.snackBar.openSnackBar("Użytkownik musi być zalogowany");
     }
   }
 }
