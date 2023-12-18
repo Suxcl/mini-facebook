@@ -12,8 +12,7 @@ import { DatePipe } from '@angular/common';
   standalone: true,
   selector: 'app-post',
   styleUrls: ['./post.component.css'],
-  // Remove 'standalone' property
-  // Import other components and directives in 'declarations' instead of 'imports'
+  imports: [CommonModule],
   templateUrl: './post.component.html',
 })
 export class PostComponent {
