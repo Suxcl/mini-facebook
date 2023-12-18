@@ -28,7 +28,6 @@ export class AddPostComponent implements OnInit{
   ) {
 
     this.form4addpost = fb.group({
-      // title:['', Validators.required,Validators.maxLength(50)],
       content: ['']
     })
 
@@ -45,9 +44,12 @@ export class AddPostComponent implements OnInit{
       let p:Post  = new Post(this.postService.getUniqueId(),user.Username, this.form4addpost.value.content);
       console.log("add-post.ts newPost: ", p);
       this.postService.addPost(p);
-      
+      this.form4addpost.setValue({
+        content:''
+      })
     }else{
       console.log('add post no user ERR');
+      alert("Użytkownik musi być zallogowany");
     }
   }
 }

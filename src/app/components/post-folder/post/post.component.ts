@@ -28,6 +28,6 @@ export class PostComponent {
   }
 
   deletePost(){
-    this.pos
+    this.postService.removePost(this.post);
   }
 }
