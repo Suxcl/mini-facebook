@@ -18,6 +18,7 @@ import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { HousingService } from '../../services/housing.service';
 import { AppComponent } from '../../app.component';
 import { Observable } from 'rxjs';
+import { CommentComponent } from '../post-folder/comment/comment.component';
 
 
 
@@ -28,7 +29,7 @@ import { Observable } from 'rxjs';
     standalone: true,
     templateUrl: './blog.component.html',
     styleUrl: './blog.component.css',
-    imports: [PostsComponent, AddPostComponent, UsersComponent]
+    imports: [PostsComponent, AddPostComponent, UsersComponent, CommentComponent]
 })
 
 
