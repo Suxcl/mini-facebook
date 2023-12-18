@@ -5,27 +5,45 @@ import { Post } from '../models/post.model';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class PostService implements OnInit{
+export class PostService{
 
   public refreshPosts$: EventEmitter<void> = new EventEmitter<void>();
   Posts:Post[]=[];
   PostsSubject$ = new BehaviorSubject<Post[]>([]);
-
+  loggedUser!:User;
   constructor
   (
     private housingService: HousingService,
-    private httpClient: HttpClient,
   ) 
   {
-    // console.log("post.service constructor");
     this.Posts = this.housingService.getData('Posts');
+    this.loggedUser
   }
-  ngOnInit(): void {
-      
+  // post buttons actions
+  likePost(post:Post, user:User):void{
+    post.like(user.username)
+    this.Posts[this.Posts.indexOf(post)] = post;
+    this.housingService.putData('Posts',post);
   }
+  unlikePost(post:Post, user:User):void{
+    post.unlike(user.username)
+    this.Posts[this.Posts.indexOf(post)] = post;
+    this.housingService.putData('Posts',post);
+  }
+  dislikePost(post:Post, user:User):void{
+    post.dislike(user.username)
+    this.housingService.putData('Posts',post);
+  }
+  undislikePost(post:Post, user:User):void{
+    post.undislike(user.username)
+    this.housingService.putData('Posts',post);
+  }
+
+  // basic post actions
   addPost(newpost:Post):void{
     this.housingService.postData('Posts',newpost);
     this.Posts.push(newpost)

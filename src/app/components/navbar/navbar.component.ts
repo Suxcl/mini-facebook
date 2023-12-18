@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit{
     private snackBar:MatSnackBar,
   )
   {
+    this.isLogged = this.authenticationService.isSomeoneLoggedIn();
     // Refreshing Navbar if someone logged in
       this.authenticationService.refreshNavbarLogin$.subscribe(()=>{
         console.log("navbar.ts triggering refreshing");
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit{
     this.authenticationService.logout();
     console.log("wylogowano użytkownika");
     this.openToast('Wylogowano użytkownika');
+    location.reload();
     
   }
 

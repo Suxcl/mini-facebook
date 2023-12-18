@@ -1,5 +1,5 @@
 <div id="post_display">
-
+  <!-- Post info -->
   <div class="top-post">
     <div class="user">user: {{post.Username}}</div>
     <div class="date" appPostDate [inputDate]="post.PublishDate">
@@ -9,9 +9,17 @@
 
   <div class="content">{{post.Content}}</div><br>
   <div class="post_data">
-    <img src="assets/img/like.svg" alt="likes:"> <div id="likes">{{post.Likes}}</div>
-    <img src="assets/img/dislike.svg" alt="dislikes:"><div id="dislikes">{{post.Dislikes}}</div>
-    <img src="assets/img/comment.svg" alt="comments:"><div id="comments">{{post.CommentsCount}}</div>
+    <!-- post buttons -->
+    <button [ngClass]="{'green' : toggle_like, '': !toggle_like}" (click)="likePost()"><img src="assets/img/like.svg" alt="likes:"></button> 
+    <div id="likes">{{post.Likes}}</div>
+    <button (click)="dislikePost()"><img src="assets/img/dislike.svg" alt="dislikes:"></button>
+    <div id="dislikes">{{post.Dislikes}}</div>
+    <button (click)="addComment()"><img src="assets/img/comment.svg" alt="comments:"></button>
+    <div id="comments">{{post.CommentsCount}}</div>
+  </div>
+  <!-- comments -->
+  <div>
+    
   </div>
 
   <span *ngIf="this.your_profile">

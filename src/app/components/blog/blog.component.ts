@@ -51,6 +51,7 @@ export class BlogComponent implements OnInit{
     private auth:AuthenticationService,
     
     ){
+      
       // console.log("blog.ts constructor");
     }
 

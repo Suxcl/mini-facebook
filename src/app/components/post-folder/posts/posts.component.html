@@ -1,8 +1,9 @@
 <ol>
-    <li class="post" *ngFor="let post of posts;">
+    <li class="post" *ngFor="let post of posts;index as i">
         <app-post
         [post]="post"
         [your_profile]="this.your_profile"
+        [post_id_in_service]="i"
         ></app-post>
     </li>
 </ol>

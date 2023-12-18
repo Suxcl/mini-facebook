@@ -5,10 +5,10 @@ export class Post {
     private username!: string;
     private content!: string;
     private comments!: Comment [];
-    private comments_count:number = 0;
-    private likes:number = 0;
+    private comments_count:number;
+    private likes:number;
     private ppl_who_like:string[] = [];
-    private dislikes:number = 0;
+    private dislikes:number;
     private ppl_who_dislike:string[] = [];
     private img: string[] = [];
     private publishDate: Date = new Date();
@@ -44,9 +44,7 @@ export class Post {
       return this.comments;
     }
 
-    public get Likes(): number{
-      return this.likes;
-    }
+
 
     public get Dislikes():number{
       return this.dislikes;
@@ -58,6 +56,10 @@ export class Post {
 
     public get PublishDate():Date{
       return this.publishDate;
+    }
+    // likes
+    public get Likes(): number{
+        return this.likes;
     }
 
     //setters
@@ -72,6 +74,15 @@ export class Post {
     public set Id(v : number){
         this.id = v;
     }
+
+    
+    get PplWhoDislike():string[]{
+      return this.ppl_who_dislike;
+    }
+    get PplWhoLike():string[]{
+      return this.ppl_who_like;
+    }
+
 
     //comment
     getComment(ind:number):Comment{
@@ -100,8 +111,27 @@ export class Post {
         this.dislikes++;
     }
     undislike(u:string){
-        this.ppl_who_like.splice(this.ppl_who_like.indexOf(u),1);
+        this.ppl_who_dislike.splice(this.ppl_who_dislike.indexOf(u),1);
         this.dislikes--;
     }
-}
+    userLikesOrUnlikes(u:string):boolean{
+      if(this.ppl_who_like.includes(u) || this.ppl_who_dislike.includes(u)){
+        return true;
+      }
+      return false;
+    }
+    userLikesPost(u:string):boolean{
+      if(this.ppl_who_like.includes(u)){
+        return true;
+      }
+      return false;
+    }
+    userDislikesPost(u:string):boolean{
+      if(this.ppl_who_dislike.includes(u)) {
+        return true;
+      }
+      return false;
+    }
+    
+  }
 
