@@ -13,11 +13,11 @@ export class UserService {
 
   constructor(
     private housingService: HousingService,
-    
+
   ) {
     console.log("user.service constructor reading users from db");
-    this.Users = this.housingService.getData('Users');    
-    
+    this.Users = this.housingService.getData('Users');
+
   }
 
   getUsers():User[]{
@@ -43,12 +43,22 @@ export class UserService {
     }
     return {} as User;
   }
+
+  getUserByUsernameForValidator(username:string):User|null{
+    for(let user of this.Users){
+      if (user.Username===username) {
+        return user;
+      }
+    }
+    return null;
+  }
+
   getUserIndex(user:User):number{
     return this.Users.indexOf(user);
   }
   isUsernameTaken(username:string){
-    if (this.getUserByUsername(username) != null) {
-      console.log(username+":"+ (this.getUserByUsername(username) != {} as User));
+    if (this.getUserByUsernameForValidator(username) != null) {
+      console.log(username+":"+ (this.getUserByUsernameForValidator(username) != null));
       return true
     }
     return false

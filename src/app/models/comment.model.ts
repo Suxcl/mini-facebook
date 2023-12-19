@@ -3,14 +3,15 @@ import { User } from "./user.model";
 export class Comment {
     public id:number;
     public content: string;
-    public owner: User;
-    public to: Post;
+    public owner: string;
+    public to: number;
     public likes:number;
     public ppl_which_liked: string[] = [];
     public dislikes:number;
     public ppl_which_disliked: string[] = [];
+    public publishDate: Date = new Date();
     
-    constructor(id:number, content: string, from: User, to: Post) {
+    constructor(id:number, content: string, from: string, to: number) {
         this.content = content;
         this.owner = from;
         this.to = to;
@@ -19,6 +20,7 @@ export class Comment {
         this.dislikes = 0;
         this.ppl_which_liked = [];
         this.ppl_which_disliked = [];
+
     }
 
     get Id(): number {
@@ -27,10 +29,10 @@ export class Comment {
     get Content(): string {
         return this.content;
     }
-    get Owner(): User {
+    get Owner(): string {
         return this.owner;
     }
-    get To(): Post {
+    get To(): number {
         return this.to;
     }
     get Likes(): number {
@@ -39,5 +41,22 @@ export class Comment {
     get Dislikes(): number {
         return this.dislikes;
     }
-
+    set Id(id: number) {
+        this.id = id;
+    }
+    set Content(content: string) {
+        this.content = content;
+    }
+    set Owner(owner: string) {
+        this.owner = owner;
+    }
+    set To(to: number) {
+        this.to = to;
+    }
+    set Likes(likes: number) {
+        this.likes = likes;
+    }
+    set Dislikes(dislikes: number) {
+        this.dislikes = dislikes;
+    }
 }

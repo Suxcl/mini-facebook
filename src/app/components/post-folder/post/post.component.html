@@ -12,17 +12,45 @@
     <!-- post buttons -->
     <button [ngClass]="{'green' : toggle_like, '': !toggle_like}" (click)="likePost()"><img src="assets/img/like.svg" alt="likes:"></button> 
     <div id="likes">{{post.Likes}}</div>
-    <button (click)="dislikePost()"><img src="assets/img/dislike.svg" alt="dislikes:"></button>
+    <button [ngClass]="{'red' : toggle_dislike, '': !toggle_dislike}" (click)="dislikePost()"><img src="assets/img/dislike.svg" alt="dislikes:"></button>
     <div id="dislikes">{{post.Dislikes}}</div>
-    <button (click)="addComment()"><img src="assets/img/comment.svg" alt="comments:"></button>
+    <img src="assets/img/comment.svg" alt="comments:">
     <div id="comments">{{post.CommentsCount}}</div>
   </div>
   <!-- comments -->
   <div>
+    <div class="container">
+      <form [formGroup]="comment_form" (ngSubmit)="addComment()">
+        <div class="inputs">
+          <input type="text" formControlName="content" /><br />
+        </div>
+        <div class="actions">
+          <input
+            [disabled]="comment_form.invalid"
+            type="submit"
+            value="Dodaj Komentarz"
+          />
+        </div>
+      </form>
+    </div>
     
+    <ul>
+      <li *ngFor="let comment of this.post.Comments | slice:0:count">
+        
+        <p>{{comment.owner}}</p>
+        <p>{{comment.content}}</p>
+        <p>{{comment.publishDate | date: 'medium'}}</p>
+        <span *ngIf="comment.owner === this.logUser.username">
+          <button (click)="editComment(comment)">Edytuj</button>
+          <button (click)="deleteComment(comment)">Usuń</button>
+        </span>
+      </li>  
+    </ul>
+    <p *ngIf="this.post.Comments.length > 2 && count == 2" (click)='count=this.post.Comments.length'>Pokaż więcej komentarzy</p>
+    <p *ngIf="count != 2" (click)='count=2'>Ukryj komentarze</p>
   </div>
 
-  <span *ngIf="this.your_profile">
+  <span *ngIf="your_profile">
     <button  (click)="editPost()">Edytuj</button>
     <button  (click)="deletePost()">Usuń</button>
   </span>

@@ -3,6 +3,7 @@ import { Injectable, EventEmitter, OnInit} from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Post } from '../models/post.model';
 import { User } from '../models/user.model';
+import { Comment } from '../models/comment.model';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -77,4 +78,9 @@ export class PostService{
     return unique;
   }
 
+  addComment(c:Comment, p:Post){
+    console.log("AHA", c, p)
+    p.addComment(c);
+    this.housingService.putData('Posts',p);
+  }
 }
