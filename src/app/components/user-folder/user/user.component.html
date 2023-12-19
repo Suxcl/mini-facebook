@@ -1,57 +1,61 @@
 <div class="user-profile">
-  <p>user works!</p>
-  <p>{{ user.Username }}</p>
-  <p>{{ user.Name }} {{ user.Surname }}</p>
+  <div class="left-content">
+    <h3>Posty Użytkownika:</h3>
+    <app-posts 
+      [posts]="user_posts"
+      [your_profile]="true"
+    ></app-posts>
+  </div>
 
-  <span *ngIf="yourProfile">
-    <p>Witaj na swoim Profilu!</p>
-  </span>
+  <div class="right-content">
+    <div class="names">
+      <p class="user_data">Nazwa Użytkownika: {{ user.Username }}</p>
+      <p class="user_data">Imię i Nazwisko: {{ user.Name }} {{ user.Surname }}</p>
+    </div>
 
-  <p>Tablica użytkownika</p>
-  <app-posts 
-    [posts]="user_posts"
-    [your_profile]="true"
-  ></app-posts>
-
-  <div *ngIf="!yourProfile">
-    <p>Przycisk akcji Znajomych</p>
-    <span *ngIf="!isLoggedUserFriendWithCurrentUser()">
-      <button (click)="sendInvite()">Dodaj znajomego</button>
+    <span *ngIf="yourProfile">
+      <p>Witaj na swoim Profilu!</p>
     </span>
-    <span *ngIf="isLoggedUserFriendWithCurrentUser()">
-      <button (click)="removeFriend()">Usun znajomego</button>
-    </span>
-  </div>
+    <div >
+      <br>
+      <h3 class="user_tab">Tablica użytkownika</h3>
+    </div>
+    <div *ngIf="!yourProfile">
+      <p>Przycisk akcji Znajomych: 
+      <span *ngIf="!isLoggedUserFriendWithCurrentUser()">
+        <button (click)="sendInvite()">Dodaj znajomego</button>
+      </span>
+      <span *ngIf="isLoggedUserFriendWithCurrentUser()">
+        <button (click)="removeFriend()">Usun znajomego</button>
+      </span>
+      </p>
+    </div>
 
-  <div *ngIf="yourProfile">
-    <p>Znajomi:</p>
-    <ul *ngFor="let user of this.user.FriendsList">
-      <li>{{user}}</li>
-    </ul>
-  </div>
+    <div *ngIf="yourProfile">
+      <p>Znajomi:</p>
+      <ul *ngFor="let user of this.user.FriendsList">
+        <li>{{user}}</li>
+      </ul>
 
-  <div *ngIf="yourProfile">
-    <p>Lista zaproszeń</p>
-    <ul *ngFor="let request of this.requests">
-      <li>
-        Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
-        <button (click)="acceptInvite(request)">
-          Akceptuj
-        </button>
-        <button (click)="declineInvite(request)">
-          Odrzuć
-        </button>
-      </li>
-    </ul>
-  </div>
+      <p>Lista zaproszeń</p>
+      <ul *ngFor="let request of this.requests">
+        <li>
+          Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
+          <button (click)="acceptInvite(request)">
+            Akceptuj
+          </button>
+          <button (click)="declineInvite(request)">
+            Odrzuć
+          </button>
+        </li>
+      </ul>
 
-  <div *ngIf="yourProfile">
-    <p>Cała Lista zaproszeń</p>
-    <ul *ngFor="let request of this.allRequests">
-      <li>
-        Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
-        
-        
-      </li>
-    </ul>
+      <p>Cała Lista zaproszeń</p>
+      <ul *ngFor="let request of this.allRequests">
+        <li>
+          Id {{ request.Id }} Status {{ request.status }} {{ request.from.username }} {{ request.to.username }}
+        </li>
+      </ul>
+    </div>
   </div>
+</div>
