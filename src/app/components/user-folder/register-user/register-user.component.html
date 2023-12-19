@@ -12,7 +12,7 @@
           </div>
 
           <label for="password">Password: </label><br>
-          <input type="text" formControlName="password" placeholder="hasło"><br>
+          <input type="password" formControlName="password" placeholder="hasło"><br>
           <div *ngIf="f.get('password')?.invalid && (f.get('password')?.touched || f.get('password')?.dirty)" class="alert">
             <div *ngIf="f.get('password')?.errors?.['required']">Password is required.</div>
             <div *ngIf="f.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</div>

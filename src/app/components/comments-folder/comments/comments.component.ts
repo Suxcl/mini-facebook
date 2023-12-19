@@ -3,10 +3,11 @@ import { Comment } from '../../../models/comment.model';
 import { CommentsService } from '../../../services/comments.service';
 import { CommentComponent } from '../comment/comment.component';
 import { PostComponent } from '../../post-folder/post/post.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
-  imports: [CommentComponent,PostComponent],
+  imports: [CommonModule,CommentComponent,PostComponent],
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css'
