@@ -43,6 +43,9 @@ export class NavbarComponent implements OnInit{
 
   ngOnInit(): void {
       this.isLogged = this.authenticationService.isSomeoneLoggedIn();
+      if(this.isLogged===undefined){
+        this.isLogged = false;
+      }
       console.log("navbar.ts test logged user "+this.authenticationService.getLoggedUser().Surname);
   }
  
