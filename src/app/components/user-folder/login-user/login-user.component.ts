@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../../../services/snackbar.service';
 
 @Component({
   selector: 'app-login-user',
@@ -23,8 +24,9 @@ export class LoginUserComponent implements OnInit{
     private router: Router,
     private userService: UserService,
     private auth:AuthenticationService,
-    private snackBar:MatSnackBar,
-    private formBuilder:FormBuilder){
+    private formBuilder:FormBuilder,
+    private snackbar:SnackbarService
+    ){
       console.log("login constructor running")
       this.form4login = formBuilder.group({
         username:
@@ -60,12 +62,12 @@ export class LoginUserComponent implements OnInit{
       if (this.form4login.value.username == temp.Username && this.form4login.value.password == temp.Password) {
         console.log('Login.ts login Succeded');
 
-        // this.openToast("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
+        this.snackbar.openSnackBar("Login.ts Udane Logowanie, nastepuje przekierowanie na stronę główną");
         this.auth.login(temp); // zalogowanie usera w service authenticator
         this.router.navigate(['/'])
           // przekierowanie gdziekolwiek bo i tak przejdzie na stronę główną
       }else{ // gdy podane są złe dane
-        // this.openToast("Błędne dane");
+        this.snackbar.openSnackBar("Błędne dane");
         console.log('Login.ts Login fails');
       }
     }
