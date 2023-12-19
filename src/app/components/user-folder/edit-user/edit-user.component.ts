@@ -24,6 +24,9 @@ export class EditUserComponent implements OnInit {
 
   form4edit:FormGroup;
 
+
+;
+
   constructor(
     private router: Router,
     private userService: UserService){

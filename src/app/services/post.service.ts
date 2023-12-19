@@ -50,8 +50,9 @@ export class PostService{
     this.Posts.push(newpost)
   }
   removePost(post:Post):void{
-    this.Posts.splice(this.Posts.indexOf(post),1);
     this.housingService.deleteData('Posts',post.Id);
+    this.Posts.splice(this.Posts.indexOf(post),1);
+    
   }
   getPosts():Post[]{
     return this.Posts;

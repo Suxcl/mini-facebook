@@ -1,0 +1,29 @@
+<div class="container rounded ">
+    <!-- Post info -->
+    <div class="row">
+      <img class="col-2 mt-2" src="assets/img/user-icon.svg" alt="user" width="30" height="30">
+      <div class="col-3 p-2">{{post.Username}}</div>
+      <div class="col-7 p-2 text-right" appPostDate [inputDate]="post.PublishDate">
+        <!-- {{post.PublishDate | date: 'medium'}} -->
+      </div>
+    </div>
+    <hr class="hr" />
+    <!-- post content -->
+    <div class="content p-4">{{post.Content}}</div>
+    
+    <!-- post buttons -->     
+      <div class="row">
+        <div class="p-2">
+          <button type="button" [ngClass]="{'green' : toggle_like, '': !toggle_like, } " class="btn btn-secondary" (click)="likePost()"><img src="assets/img/like.svg" alt="likes:" width="25" height="25"></button> 
+          <div id="likes">{{post.Likes}}</div>
+        </div>
+        <div class="p-2">
+          <button type="button" [ngClass]="{'red' : toggle_dislike, '': !toggle_dislike}" class="btn btn-secondary" (click)="dislikePost()"><img src="assets/img/dislike.svg" alt="dislikes:" width="25" height="25"></button>
+          <div id="dislikes">{{post.Dislikes}}</div>  
+        </div>
+        <div class="p-2">
+          <div type="button" disabled class="btn btn-light"><img src="assets/img/comment.svg" alt="comments:" width="25" height="25"></div>
+          <div id="comments">{{post.CommentsCount}}</div>  
+        </div>
+        </div>
+    </div>

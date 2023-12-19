@@ -124,16 +124,16 @@ export class PostComponent {
     this.comment_form.setValue({content:''})
   }
   
-  editComment(comment:Comment){
+  // editComment(comment:Comment){
     
-  }
+  // }
 
-  deleteComment(comment:Comment){
+  // deleteComment(comment:Comment){
 
-  }
-  // owner post handling
+  // }
+  // // owner post handling
   editPost(){
-
+    
   }
 
   deletePost(){
